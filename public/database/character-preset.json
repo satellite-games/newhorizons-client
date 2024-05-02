@@ -1,0 +1,26 @@
+[
+  {
+    "id": "character-preset/default",
+    "attributePoints": 32,
+    "traitPoints": 0,
+    "traitsMinimum": 5,
+    "traitsMaximum": 15,
+    "abilitiesMaximum": 4,
+    "interestPoints": 100,
+    "bonusCredits": 0,
+    "startExperience": 0,
+    "startFaithPoints": 1
+  },
+  {
+    "id": "character-preset/hero",
+    "attributePoints": 35,
+    "traitPoints": 10,
+    "traitsMinimum": 5,
+    "traitsMaximum": 15,
+    "abilitiesMaximum": 6,
+    "interestPoints": 110,
+    "bonusCredits": 0,
+    "startExperience": 0,
+    "startFaithPoints": 2
+  }
+]

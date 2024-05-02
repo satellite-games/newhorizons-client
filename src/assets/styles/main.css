@@ -1,0 +1,11 @@
+@import './vuetify.css';
+@import './text.css';
+@import './colors.css';
+
+:root {
+  --accent-bar-height: 2px;
+}
+
+html {
+  overflow: auto;
+}

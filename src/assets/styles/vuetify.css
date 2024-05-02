@@ -1,0 +1,26 @@
+@import 'vuetify/styles';
+
+:root {
+  --v-toolbar-image-opacity: 0.5;
+}
+
+.v-app-bar {
+  height: var(--header-height);
+  box-sizing: content-box;
+}
+
+.v-container {
+  max-width: 1440px;
+}
+
+.v-btn {
+  text-transform: unset;
+}
+
+.v-btn .iconify--mdi {
+  font-size: x-large;
+}
+
+.v-btn .iconify--fa {
+  font-size: larger;
+}

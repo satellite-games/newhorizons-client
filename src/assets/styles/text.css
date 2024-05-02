@@ -1,0 +1,14 @@
+@font-face {
+  font-family: ARJulian;
+  src: url('/fonts/ARJULIAN.ttf');
+}
+
+@font-face {
+  font-family: Raleway;
+  src: url('/fonts/Raleway.ttf');
+  size-adjust: 120%;
+}
+
+#app {
+  font-family: 'Raleway', Courier, monospace;
+}
