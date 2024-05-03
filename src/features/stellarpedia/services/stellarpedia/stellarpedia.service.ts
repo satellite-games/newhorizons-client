@@ -2,7 +2,7 @@ import { Config } from '../../../../services/config';
 import { ServiceMixin } from '../../../../services/mixin';
 import { useI18n } from 'vue-i18n';
 import type { AppConfig } from '@/config/app.config';
-import type { StellarpediaBookHeader, StellarpediaBookToc, StellarpediaToc } from '../../types/toc';
+import type { StellarpediaBookHeader, StellarpediaBookToc } from '../../types';
 import jsyaml from 'js-yaml';
 
 /**
@@ -30,31 +30,32 @@ export class Stellarpedia extends ServiceMixin<Stellarpedia>() {
   }
 
   /**
+   * Attempts to fetch the list of all available books.
+   * @returns The list of books.
+   */
+  public static async fetchBooks(): Promise<StellarpediaBookHeader[]> {
+    const url = `${Config.getConfig<AppConfig>().STELLARPEDIA_BASE_URL}/books.yaml`;
+    try {
+      const response = await fetch(url);
+      const text = await response.text();
+      const books = jsyaml.load(text) as StellarpediaBookHeader[];
+      return books;
+    } catch (error) {
+      throw new Error(`Unable to retrieve list of books.`);
+    }
+  }
+
+  /**
    * Attempts to fetch the table of contents for the Stellarpedia.
    * @param book The book id.
    * @returns The table of contents.
    */
-  public static async fetchToc(book: string): Promise<StellarpediaToc> {
-    const booksUrl = `${Config.getConfig<AppConfig>().STELLARPEDIA_BASE_URL}/books.yaml`;
-    const bookTocUrl = `${Config.getConfig<AppConfig>().STELLARPEDIA_BASE_URL}/${book}/toc.yaml`;
+  public static async fetchToc(book: string): Promise<StellarpediaBookToc> {
+    const url = `${Config.getConfig<AppConfig>().STELLARPEDIA_BASE_URL}/${book}/toc.yaml`;
     try {
-      const booksPromise = fetch(booksUrl);
-      const bookTocPromise = fetch(bookTocUrl);
-      const [booksResponse, bookTocResponse] = await Promise.all([booksPromise, bookTocPromise]);
-      const [booksText, bookTocText] = await Promise.all([
-        booksResponse.text(),
-        bookTocResponse.text(),
-      ]);
-      const books = jsyaml.load(booksText) as StellarpediaBookHeader[];
-      const bookToc = jsyaml.load(bookTocText) as StellarpediaBookToc;
-      const toc: StellarpediaToc = {
-        books: books.map((book) => {
-          if (book.id === bookToc.id) {
-            return { ...book, ...bookToc };
-          }
-          return book;
-        }),
-      };
+      const response = await fetch(url);
+      const text = await response.text();
+      const toc = jsyaml.load(text) as StellarpediaBookToc;
       return toc;
     } catch (error) {
       throw new Error(`Unable to retrieve table of contents.`);

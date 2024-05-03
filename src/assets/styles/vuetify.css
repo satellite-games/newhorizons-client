@@ -24,3 +24,7 @@
 .v-btn .iconify--fa {
   font-size: larger;
 }
+
+.v-skeleton-loader {
+  opacity: 0.3;
+}

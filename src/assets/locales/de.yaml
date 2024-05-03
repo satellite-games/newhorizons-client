@@ -50,3 +50,7 @@ sidebar:
     community:
       title: Community
       discord: Discord
+
+stellarpedia:
+  sidebar:
+    book: Buch

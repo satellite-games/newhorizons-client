@@ -8,13 +8,13 @@ const { mobile } = useDisplay();
 </script>
 
 <template>
-  <VNavigationDrawer id="sidebar" v-model="Interface.sidebarExpanded.value" :width="350">
+  <VNavigationDrawer id="sidebar" v-model="Interface.sidebarExpanded.value" width="350">
     <div v-if="mobile">
       <AppNavigation />
       <VDivider />
     </div>
     <div id="sidebar-content"></div>
-    <slot />
+    <slot></slot>
   </VNavigationDrawer>
 </template>
 
@@ -24,7 +24,8 @@ const { mobile } = useDisplay();
     margin-right: 0.5rem;
   }
 
-  .v-list-item-title {
+  .v-list-item-title,
+  .v-list-item__content {
     white-space: unset;
   }
 }
