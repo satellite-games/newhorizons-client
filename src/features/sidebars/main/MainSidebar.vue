@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { VDivider, VListItem } from 'vuetify/components';
+import { VListItem } from 'vuetify/components';
 import { Icon } from '@iconify/vue';
-import SidebarTeleport from '../SidebarTeleport.vue';
+import SidebarTeleport from '../../../components/sidebar/SidebarTeleport.vue';
 </script>
 
 <template>

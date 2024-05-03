@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import HomeRoute from '@/routes/HomeRoute.vue';
 import AboutRoute from '@/routes/AboutRoute.vue';
 import CreateCharacterRoute from '@/routes/CreateCharacterRoute.vue';
-import StellarpediaArticleRoute from '@/routes/stellarpedia/StellarpediaArticleRoute.vue';
+import { stellarpediaRoutes } from '@/features/stellarpedia/routes';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -22,11 +22,7 @@ const router = createRouter({
       name: 'create-character',
       component: CreateCharacterRoute,
     },
-    {
-      path: '/stellarpedia/:book/:chapter/:article',
-      name: 'stellarpedia-article',
-      component: StellarpediaArticleRoute,
-    },
+    ...stellarpediaRoutes,
   ],
 });
 

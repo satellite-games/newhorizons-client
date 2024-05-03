@@ -10,6 +10,5 @@ export class Interface extends ServiceMixin<Interface>() {
 
   static togglesidebar() {
     Interface.instance._sidebarExpanded.value = !Interface.instance._sidebarExpanded.value;
-    console.log(Interface.sidebarExpanded);
   }
 }

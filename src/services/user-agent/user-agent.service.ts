@@ -20,8 +20,5 @@ export default class UserAgent extends ServiceMixin<UserAgent>() {
     window.addEventListener('resize', UserAgent.handleResize);
   }
 
-  static handleResize() {
-    console.log('resize!');
-    // UserAgent.instance._isDesktop.value =
-  }
+  static handleResize() {}
 }
