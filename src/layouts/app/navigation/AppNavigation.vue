@@ -1,30 +1,22 @@
 <script setup lang="ts">
-import { VTabs, VTab } from 'vuetify/components';
-import { Icon } from '@iconify/vue';
+import { VTabs } from 'vuetify/components';
 import { useDisplay } from 'vuetify';
-import { computed } from 'vue';
+import AppNavigationTab from './AppNavigationTab.vue';
 
 const { mobile } = useDisplay();
 </script>
 <template>
   <VTabs :direction="mobile ? 'vertical' : 'horizontal'">
-    <VTab to="/" exact>
-      <template v-slot:prepend>
-        <Icon icon="mdi:home" />
-      </template>
-      {{ $t('route.home.title') }}
-    </VTab>
-    <VTab to="/create-character">
-      <template v-slot:prepend>
-        <Icon icon="mdi:account-plus" />
-      </template>
-      {{ $t('route.create-character.title') }}
-    </VTab>
-    <VTab to="/stellarpedia/basic-rules/introduction/welcome">
-      <template v-slot:prepend>
-        <Icon icon="mdi:weather-sunny" />
-      </template>
-      {{ $t('route.stellarpedia.title') }}
-    </VTab>
+    <AppNavigationTab to="/home" icon="mdi:home" :title="$t('route.home.title')" />
+    <AppNavigationTab
+      to="/create-character"
+      icon="mdi:account-plus"
+      :title="$t('route.create-character.title')"
+    />
+    <AppNavigationTab
+      to="/stellarpedia"
+      icon="mdi:weather-sunny"
+      :title="$t('route.stellarpedia.title')"
+    />
   </VTabs>
 </template>

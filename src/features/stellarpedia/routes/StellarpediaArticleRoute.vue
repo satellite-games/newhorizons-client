@@ -1,23 +1,15 @@
 <script setup lang="ts">
-import { Stellarpedia } from '@/features/stellarpedia/services/stellarpedia';
-import { useRouteParamsAsString } from '@/router/router.hooks';
-import Markdown from '@/services/markdown/markdown.service';
-import { ref } from 'vue';
+import { useRouteParamsAsStrings } from '@/router/router.hooks';
 import StellarpediaSidebar from '../sidebar/StellarpediaSidebar.vue';
+import Container from '@/components/layout/Container.vue';
+import StellarpediaArticle from '../components/article/StellarpediaArticle.vue';
 
-const content = ref<string | null>(null);
-const load = () => {
-  const { book, chapter, article } = useRouteParamsAsString();
-  Stellarpedia.fetchArticle(book, chapter, article).then(async (text) => {
-    const html = await Markdown.parse(text);
-    content.value = html;
-  });
-};
-
-load();
+const params = useRouteParamsAsStrings() as { book: string; chapter: string; article: string };
 </script>
 
 <template>
   <StellarpediaSidebar />
-  <div v-html="content"></div>
+  <Container size="max">
+    <StellarpediaArticle :book="params.book" :chapter="params.chapter" :article="params.article" />
+  </Container>
 </template>

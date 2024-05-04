@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Container from '@/components/layout/Container.vue';
-import MainSidebar from '@/features/sidebars/main/MainSidebar.vue';
+import MainSidebar from '@/features/main/sidebar/MainSidebar.vue';
 import {
   VParallax,
   VDivider,

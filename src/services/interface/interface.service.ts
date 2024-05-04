@@ -11,4 +11,8 @@ export class Interface extends ServiceMixin<Interface>() {
   static togglesidebar() {
     Interface.instance._sidebarExpanded.value = !Interface.instance._sidebarExpanded.value;
   }
+
+  static setSidebarExpanded(open: boolean) {
+    Interface.instance._sidebarExpanded.value = open;
+  }
 }

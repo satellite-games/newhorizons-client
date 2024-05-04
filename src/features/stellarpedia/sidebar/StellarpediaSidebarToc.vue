@@ -54,20 +54,19 @@ updateTableOfContents();
         </VListItem>
       </template>
 
-      <RouterLink
+      <VListItem
         v-for="article in chapter.articles"
         :key="article.id"
         :to="`/stellarpedia/${bookId}/${chapter.id}/${article.id}`"
+        link
       >
-        <VListItem link>
-          <template v-slot:prepend>
-            <Icon icon="mdi:file-document" />
-          </template>
-          <template v-slot:default>
-            {{ article.title[locale] }}
-          </template>
-        </VListItem>
-      </RouterLink>
+        <template v-slot:prepend>
+          <Icon icon="mdi:file-document" />
+        </template>
+        <template v-slot:default>
+          {{ article.title[locale] }}
+        </template>
+      </VListItem>
     </VListGroup>
   </VList>
 </template>

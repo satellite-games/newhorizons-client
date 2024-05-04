@@ -1,22 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import HomeRoute from '@/routes/HomeRoute.vue';
-import AboutRoute from '@/routes/AboutRoute.vue';
 import CreateCharacterRoute from '@/routes/CreateCharacterRoute.vue';
 import { stellarpediaRoutes } from '@/features/stellarpedia/routes';
+import { mainRoutes } from '@/features/main/routes';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    {
-      path: '/',
-      name: 'home',
-      component: HomeRoute,
-    },
-    {
-      path: '/about',
-      name: 'about',
-      component: AboutRoute,
-    },
+    ...mainRoutes,
     {
       path: '/create-character',
       name: 'create-character',

@@ -5,7 +5,7 @@ app:
 
 route:
   home:
-    title: Startseite
+    title: Home
     quickstart:
       header: Tauche ein in die Welt von <b>{highlight}</b>
       text: >

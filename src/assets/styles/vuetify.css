@@ -28,3 +28,8 @@
 .v-skeleton-loader {
   opacity: 0.3;
 }
+
+.v-skeleton-loader__bone {
+  margin-left: 0;
+  margin-right: 0;
+}
