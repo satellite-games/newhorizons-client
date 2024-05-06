@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@spuxx/browser-utils':
+        specifier: 0.1.0-rc.3
+        version: 0.1.0-rc.3(@modyfi/vite-plugin-yaml@1.1.0(rollup@4.14.2)(vite@5.2.8(@types/node@20.12.7)))
       isomorphic-dompurify:
         specifier: ^2.7.0
         version: 2.7.0
@@ -488,6 +491,14 @@ packages:
 
   '@sinclair/typebox@0.27.8':
     resolution: {integrity: sha512-+Fj43pSMwJs4KRrH/938Uf+uAELIgVBmQzg/q1YG10djyfA3TnrU8N8XzqCh/okZdszqBQTZf96idMfE5lnwTA==}
+
+  '@spuxx/browser-utils@0.1.0-rc.3':
+    resolution: {integrity: sha512-0NlNvpeCl9OKRalTZgkdVmeMstJu0JZgm6KcT2DxHPzXiYhFVP0agv79VUjilbOYIZXUnu4wZIW+5aAXow9QEA==}
+    peerDependencies:
+      '@modyfi/vite-plugin-yaml': ^1.0.4
+    peerDependenciesMeta:
+      '@modyfi/vite-plugin-yaml':
+        optional: true
 
   '@tsconfig/node20@20.1.4':
     resolution: {integrity: sha512-sqgsT69YFeLWf5NtJ4Xq/xAF8p4ZQHlmGW74Nu2tD4+g5fAsposc4ZfaaPixVu4y01BEiDCWLRDCvDM5JOsRxg==}
@@ -2217,6 +2228,10 @@ snapshots:
   '@rushstack/eslint-patch@1.10.2': {}
 
   '@sinclair/typebox@0.27.8': {}
+
+  '@spuxx/browser-utils@0.1.0-rc.3(@modyfi/vite-plugin-yaml@1.1.0(rollup@4.14.2)(vite@5.2.8(@types/node@20.12.7)))':
+    optionalDependencies:
+      '@modyfi/vite-plugin-yaml': 1.1.0(rollup@4.14.2)(vite@5.2.8(@types/node@20.12.7))
 
   '@tsconfig/node20@20.1.4': {}
 

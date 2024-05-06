@@ -1,5 +1,5 @@
+import { ServiceMixin } from '@spuxx/browser-utils';
 import { ref } from 'vue';
-import { ServiceMixin } from '../mixin';
 
 export class Interface extends ServiceMixin<Interface>() {
   _sidebarExpanded = ref(false);

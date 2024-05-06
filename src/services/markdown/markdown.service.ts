@@ -1,6 +1,6 @@
 import { marked } from 'marked';
-import { ServiceMixin } from '../mixin';
 import { sanitize } from 'isomorphic-dompurify';
+import { ServiceMixin } from '@spuxx/browser-utils';
 
 export default class Markdown extends ServiceMixin<Markdown>() {
   public static async parse(markdown: string): Promise<string> {

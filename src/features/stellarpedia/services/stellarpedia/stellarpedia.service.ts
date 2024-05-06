@@ -1,8 +1,7 @@
-import { Config } from '../../../../services/config';
-import { ServiceMixin } from '../../../../services/mixin';
 import type { AppConfig } from '@/config/app.config';
 import type { StellarpediaBookHeader, StellarpediaBookToc } from '../../types';
 import jsyaml from 'js-yaml';
+import { Config, ServiceMixin } from '@spuxx/browser-utils';
 
 const headers: Record<string, string> = {
   // 'Cache-Control': 'no-cache',

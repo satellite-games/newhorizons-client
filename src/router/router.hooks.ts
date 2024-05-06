@@ -1,9 +1,11 @@
 import { reactive, watch } from 'vue';
 import { useRoute } from 'vue-router';
 
+/**
+ * Provides easy access to the route params as an array of strings.
+ */
 export function useRouteParamsAsStrings() {
   const route = useRoute();
-  // const stringParams: { [key: string]: string } = {};
   const stringParams = reactive<{ [key: string]: string }>({});
 
   const updateParams = () => {

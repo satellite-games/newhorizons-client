@@ -10,11 +10,14 @@
     "test:unit": "vitest",
     "test:e2e": "playwright test",
     "build-only": "vite build",
+    "check": "run-s type-check lint prettier-check",
     "type-check": "vue-tsc --build --force",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
+    "prettier-check": "prettier --check src/",
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@spuxx/browser-utils": "0.1.0-rc.3",
     "isomorphic-dompurify": "^2.7.0",
     "js-yaml": "^4.1.0",
     "marked": "^12.0.2",
