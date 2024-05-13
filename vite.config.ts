@@ -11,4 +11,15 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        // We use manualChunks to create some feature-specific chunks.
+        manualChunks: {
+          game: ['@newhorizons/core'],
+          wiki: ['js-yaml', 'marked'],
+        },
+      },
+    },
+  },
 });
