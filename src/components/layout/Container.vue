@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import { VSheet } from 'vuetify/components';
+import Loader, { type LoaderType } from '../common/Loader.vue';
 
 const props = defineProps<{
   size?: 'small' | 'medium' | 'large' | 'auto' | 'max';
+  state?: Resource;
+  loaderType: LoaderType;
 }>();
 
 const size = props.size || 'auto';
@@ -10,7 +13,13 @@ const size = props.size || 'auto';
 
 <template>
   <VSheet :class="['pa-4', 'pa-sm-6', 'pa-md-8', $style[size]]" rounded>
-    <slot></slot>
+    <Loader v-if="state === null || state === 'pending'" :type="loaderType" />
+    <span v-else-if="state === 'failed'">
+      {{ $t('error.content-load-failure') }}
+    </span>
+    <section v-else>
+      <slot></slot>
+    </section>
   </VSheet>
 </template>
 
