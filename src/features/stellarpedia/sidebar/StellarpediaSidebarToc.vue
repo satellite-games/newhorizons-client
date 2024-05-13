@@ -4,7 +4,6 @@ import { Icon } from '@iconify/vue/dist/iconify.js';
 import { ref, toRef, watch } from 'vue';
 import type { StellarpediaBookToc } from '../types';
 import { Stellarpedia } from '../services/stellarpedia';
-import { sleep } from '@/utils/misc.utils';
 import { useI18n } from 'vue-i18n';
 
 const props = defineProps<{

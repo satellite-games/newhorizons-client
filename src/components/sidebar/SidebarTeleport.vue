@@ -21,12 +21,3 @@ if (open && !mobile.value) {
     <slot />
   </Teleport>
 </template>
-
-<style>
-#sidebar-content {
-  .v-list-item-title {
-    font-weight: bold;
-    text-transform: uppercase;
-  }
-}
-</style>

@@ -6,6 +6,7 @@ export const characterCreationRoutes: RouteRecordRaw[] = [
   {
     path: '/create-character',
     component: CharacterCreationRoute,
+    redirect: '/create-character/preset',
     children: [
       {
         path: 'preset',

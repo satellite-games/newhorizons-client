@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import CreateCharacterSidebar from '@/features/sidebars/edit-character/CreateCharacterSidebar.vue';
+import CharacterCreationSidebar from '@/features/character-creation/sidebar/CharacterCreationSidebar.vue';
 </script>
 
 <template>
-  <CreateCharacterSidebar />
-  <h1>This is an about page</h1>
+  <CharacterCreationSidebar />
+  <router-view />
 </template>

@@ -27,7 +27,7 @@ import {
             <VBtn to="/stellarpedia/basic-rules/introduction/about-the-game" size="large">
               {{ $t('route.home.quickstart.more') }}
             </VBtn>
-            <VBtn to="/create-character" class="ml-4 primary" size="large" color="primary">
+            <VBtn to="/create-character" class="primary" size="large" color="primary">
               {{ $t('route.home.quickstart.start') }}
             </VBtn>
           </div>

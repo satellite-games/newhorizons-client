@@ -1,12 +1,17 @@
 import { describe, test, expect } from 'vitest';
-import { BlueprintCollectionName, createGameObject, getBlueprints } from '.';
-import { Blueprint, GameObject, Saved } from 'lib/base/game-object';
+import { createGameObject, getBlueprints } from '.';
+import {
+  GameObject,
+  type Blueprint,
+  type BlueprintCollectionName,
+  type Saved,
+} from '@newhorizons/core';
 
 describe('getBlueprints', () => {
   test("should throw an error if the collection doesn't exist", async () => {
-    expect(getBlueprints('non-existent' as unknown as BlueprintCollectionName)).rejects.toThrowError(
-      "Blueprint collection 'non-existent' not found.",
-    );
+    expect(
+      getBlueprints('non-existent' as unknown as BlueprintCollectionName),
+    ).rejects.toThrowError("Blueprint collection 'non-existent' not found.");
   });
 });
 
