@@ -1,35 +1,16 @@
-/**
- * Returns a promise that resolves after the given amount of milliseconds.
- * @param ms The amount of milliseconds.
- *
- * @example
- * await sleep(1000);
- */
-export async function sleep(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
+import type { Ref } from 'vue';
 
 /**
- * Checks whether the given value is null, undefined or a string that contains only whitespace characters.
- * @param value The value to check.
- *
- * @example
- * isEmptyOrWhitespace(''); // true
- * isEmptyOrWhitespace(' '); // true
- * isEmptyOrWhitespace(undefined); // true
- * isEmptyOrWhitespace(null); // true
- * isEmptyOrWhitespace('foo'); // false
- * isEmptyOrWhitespace(0); // false
- * isEmptyOrWhitespace({}); // false
- * isEmptyOrWhitespace([]); // false
- * isEmptyOrWhitespace(false); // false
+ * A generic function that loads a resource asynchronously.
+ * @param resourceRef The `ref` that will hold the resource.
+ * @param resourcePromise The promise that resolves to the resource.
  */
-export function isEmptyOrWhitespace(value: unknown) {
-  if (typeof value === 'string') {
-    return value.trim() === '';
-  } else if (value === undefined || value === null) {
-    return true;
-  } else {
-    return false;
+export async function loadResource(resourceRef: Ref<Resource>, loader: () => Promise<unknown>) {
+  resourceRef.value = 'pending';
+  try {
+    resourceRef.value = await loader();
+  } catch (error) {
+    resourceRef.value = 'failed';
+    throw error;
   }
 }
