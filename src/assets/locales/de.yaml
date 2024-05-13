@@ -3,6 +3,9 @@ app:
   placeholder: Platzhalter
   navigation: Navigation
 
+misc:
+  loading: Lade...
+
 route:
   home:
     title: Home
@@ -45,12 +48,17 @@ route:
   stellarpedia:
     title: Stellarpedia
 
-sidebar:
-  main:
-    community:
-      title: Community
-      discord: Discord
+character-creation:
+  route:
+    preset:
+      title: Voreinstellungen
+      form:
+      start: Erstellung beginnen
+      restart: Erschaffung neustarten
 
 stellarpedia:
   sidebar:
     book: Buch
+
+error:
+  content-load-failure: Der Inhalt konnte nicht geladen werden. Bitte versuche es später erneut.
