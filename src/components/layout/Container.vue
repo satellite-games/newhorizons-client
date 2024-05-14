@@ -5,15 +5,21 @@ import Loader, { type LoaderType } from '../common/Loader.vue';
 const props = defineProps<{
   title?: string;
   size?: 'small' | 'medium' | 'large' | 'auto' | 'max';
+  elevation?: number;
   state?: Resource;
   loaderType: LoaderType;
 }>();
 
 const size = props.size || 'auto';
+const elevation = props.elevation ?? 10;
 </script>
 
 <template>
-  <VSheet :class="[$style.container, 'pa-4', 'pa-sm-6', 'pa-md-8', $style[size]]" rounded>
+  <VSheet
+    :class="[$style.container, 'pa-4', 'pa-sm-6', 'pa-md-8', $style[size]]"
+    :elevation
+    rounded
+  >
     <Loader v-if="state === null || state === 'pending'" :type="loaderType" />
     <span v-else-if="state === 'failed'">
       {{ $t('error.content-load-failure') }}
@@ -31,6 +37,8 @@ const size = props.size || 'auto';
 <style module>
 .container {
   max-width: 100%;
+  z-index: var(--z-index-container);
+  background: rgba(var(--v-theme-surface), var(--v-container-overlay-multiplier));
 }
 
 .header {

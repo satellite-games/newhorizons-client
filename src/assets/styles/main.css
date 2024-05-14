@@ -1,6 +1,7 @@
 @import './vuetify.css';
 @import './text.css';
 @import './colors.css';
+@import './layers.css';
 
 :root {
   --accent-bar-height: 2px;
