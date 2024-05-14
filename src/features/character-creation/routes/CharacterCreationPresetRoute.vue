@@ -6,11 +6,12 @@ import { VBtn, VForm } from 'vuetify/components';
 import { CharacterCreator } from '../services/character-creator';
 import ButtonSelect from '@/components/common/ButtonSelect.vue';
 import { loadResource } from '@/utils/misc.utils';
+import { GameDataProvider } from '@/services/game-data-provider';
 
 const { creationInProgress } = CharacterCreator;
 const characterPresets = ref<Resource<CharacterPreset[]>>(null);
 loadResource(characterPresets, async () => {
-  return (await import('@newhorizons/core')).characterPresets;
+  return await GameDataProvider.getBlueprints('characterPresets');
 });
 
 const handlePresetSelect = (preset: CharacterPreset) => {
