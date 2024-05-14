@@ -4,8 +4,8 @@ import { VTab } from 'vuetify/components';
 
 const { to, icon, title, exact } = defineProps<{
   to: string;
-  icon: string;
-  title: string;
+  icon?: string;
+  title?: string;
   exact?: boolean;
 }>();
 </script>
@@ -13,7 +13,7 @@ const { to, icon, title, exact } = defineProps<{
 <template>
   <VTab :to="to" :exact="exact">
     <template v-slot:prepend>
-      <Icon :icon="icon" />
+      <Icon v-if="icon" :icon="icon" />
     </template>
     {{ title }}
   </VTab>

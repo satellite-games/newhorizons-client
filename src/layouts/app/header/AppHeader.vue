@@ -5,25 +5,34 @@ import { Icon } from '@iconify/vue';
 import AppNavigation from '../navigation/AppNavigation.vue';
 import { Interface } from '@/services/interface';
 import { useDisplay } from 'vuetify';
+import { RouterLink } from 'vue-router';
 
 const { mobile } = useDisplay();
-const toggleSidebar = Interface.togglesidebar;
+const { toggleSidebar, sidebarDisabled } = Interface;
+console.log(sidebarDisabled);
 </script>
 <template>
-  <VAppBar class="header">
+  <VAppBar :class="$style.header">
     <template v-slot:prepend>
-      <VBtn icon variant="text" :onclick="toggleSidebar">
-        <Icon icon="mdi:menu" class="icon" />
+      <RouterLink :class="$style.brand" to="/">
+        <AppLogo :class="$style.logo" :size="40" />
+        <p :class="$style.title">{{ $t('app.title') }}</p>
+      </RouterLink>
+      <VBtn
+        v-if="!sidebarDisabled"
+        :class="$style['sidebar-toggle']"
+        icon
+        variant="text"
+        :onclick="toggleSidebar"
+      >
+        <Icon icon="mdi:menu" />
       </VBtn>
-      <p class="title">{{ $t('app.title') }}</p>
-      <AppLogo class="logo" :size="40" />
       <VDivider vertical v-if="!mobile" />
     </template>
     <template v-slot:title v-if="!mobile">
       <AppNavigation />
     </template>
     <template v-slot:append>
-      <!-- <VDivider vertical /> -->
       <VBtn icon variant="text" :title="$t('app.placeholder')">
         <Icon icon="mdi:account" />
       </VBtn>
@@ -31,7 +40,7 @@ const toggleSidebar = Interface.togglesidebar;
   </VAppBar>
 </template>
 
-<style scoped>
+<style module>
 .header :global(.v-toolbar__prepend .v-divider) {
   margin-left: 16px;
 }
@@ -42,15 +51,18 @@ const toggleSidebar = Interface.togglesidebar;
 }
 
 .brand {
-  height: unset;
-}
-
-.logo {
-  margin-left: 10px;
+  display: flex;
+  align-items: center;
+  color: inherit;
+  text-decoration: none;
 }
 
 .title {
   margin-left: 0.5rem;
   font-size: larger;
+}
+
+.sidebar-toggle {
+  margin-left: 0.5rem;
 }
 </style>

@@ -1,5 +1,8 @@
+<script setup lang="ts">
+import MainSidebar from '../sidebar/MainSidebar.vue';
+</script>
+
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
-  </div>
+  <MainSidebar />
+  <h1>This is the home page</h1>
 </template>

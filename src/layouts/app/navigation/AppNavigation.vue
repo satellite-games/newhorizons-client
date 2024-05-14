@@ -7,6 +7,8 @@ const { mobile } = useDisplay();
 </script>
 <template>
   <VTabs :direction="mobile ? 'vertical' : 'horizontal'">
+    <!-- Invisible navigation tab to represent root -->
+    <AppNavigationTab to="/" style="display: none" exact />
     <AppNavigationTab to="/home" icon="mdi:home" :title="$t('route.home.title')" />
     <AppNavigationTab
       to="/create-character"
