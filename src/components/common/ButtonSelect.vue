@@ -11,7 +11,7 @@ const props = defineProps<{
   itemValue: string;
   itemIcon?: string;
   color?: Color;
-  onSelect: (value: Object) => void;
+  onSelect: (value: any) => void;
 }>();
 
 // @ts-expect-error - The type of the items as well as their properties are unknown
