@@ -7,7 +7,7 @@ const props = defineProps<{
   size?: 'small' | 'medium' | 'large' | 'auto' | 'max';
   elevation?: number;
   state?: Resource;
-  loaderType: LoaderType;
+  loaderType?: LoaderType;
 }>();
 
 const size = props.size || 'auto';
