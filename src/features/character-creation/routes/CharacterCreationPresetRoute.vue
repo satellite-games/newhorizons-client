@@ -2,32 +2,43 @@
 import { ref } from 'vue';
 import { CharacterPreset } from '@newhorizons/core';
 import Container from '@/components/layout/Container.vue';
-import { VBtn, VDivider, VFooter, VForm } from 'vuetify/components';
+import { VBtn, VForm } from 'vuetify/components';
 import { CharacterCreator } from '../services/character-creator';
 import ButtonSelect from '@/components/common/ButtonSelect.vue';
 import { loadResource } from '@/utils/misc.utils';
-import { sleep } from '@spuxx/browser-utils';
 
 const { creationInProgress } = CharacterCreator;
 const characterPresets = ref<Resource<CharacterPreset[]>>(null);
 loadResource(characterPresets, async () => {
-  await sleep(50000);
   return (await import('@newhorizons/core')).characterPresets;
 });
+
+const handlePresetSelect = (preset: CharacterPreset) => {
+  console.log(preset);
+};
 </script>
 <template>
-  <Container :state="characterPresets" loaderType="spinner">
-    <h1>{{ $t('character-creation.route.preset.title') }}</h1>
-    <VDivider />
-    <VForm>
-      <ButtonSelect />
-      <VFooter>
-        <VBtn to="/create-character" class="ml-4 primary" size="large" color="primary">
-          {{
-            $t(`character-creation.route.preset.${creationInProgress ? 'restart' : 'start'}`)
-          }}</VBtn
-        >
-      </VFooter>
+  <Container
+    :title="$t('character-creation.route.preset.title')"
+    size="medium"
+    :state="characterPresets"
+    loaderType="article"
+  >
+    <VForm v-if="Array.isArray(characterPresets)">
+      <ButtonSelect
+        :label="$t('character-creation.route.preset.select')"
+        :items="characterPresets"
+        :defaultItem="characterPresets[0]"
+        itemTitle="name"
+        itemValue="name"
+        :onSelect="handlePresetSelect"
+      />
+
+      <footer class="d-flex justify-center">
+        <VBtn to="/create-character" size="large" color="primary">
+          {{ $t(`character-creation.route.preset.${creationInProgress ? 'restart' : 'start'}`) }}
+        </VBtn>
+      </footer>
     </VForm>
   </Container>
 </template>

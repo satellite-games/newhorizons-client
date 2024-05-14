@@ -13,4 +13,8 @@ declare global {
    * - T: The type of the value that was loaded.
    */
   export type Resource<T = unknown> = T | null | 'pending' | 'failed';
+  /**
+   * A color is a string that represents a color in the Vuetify theme.
+   */
+  export type Color = 'accent' | 'accent-2' | 'primary' | 'secondary';
 }

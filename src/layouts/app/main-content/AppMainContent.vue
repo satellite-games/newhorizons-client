@@ -3,7 +3,7 @@ import { VMain } from 'vuetify/components';
 </script>
 <template>
   <VMain class="main-content">
-    <div class="pa-2 pa-sm-4 pa-md-8">
+    <div class="main-content-inner pa-2 pa-sm-4 pa-md-8">
       <slot></slot>
     </div>
   </VMain>
@@ -14,5 +14,10 @@ import { VMain } from 'vuetify/components';
   max-width: 1440px;
   width: 100%;
   margin: auto;
+}
+
+.main-content-inner {
+  display: flex;
+  justify-content: center;
 }
 </style>

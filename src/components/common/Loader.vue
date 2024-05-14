@@ -11,9 +11,9 @@ const { state, type } = { state: props.state ?? 'pending', type: props.type ?? '
 </script>
 <template>
   <div :class="$style.loader" :aria-label="$t('misc.loading')">
-    <span v-if="state === null || state === 'pending'">
+    <span v-if="state === null || state === 'pending'" style="width: 100%">
       <Icon v-if="type === 'spinner'" :class="$style.spinner" icon="svg-spinners:270-ring" />
-      <VSkeletonLoader v-else :type />
+      <VSkeletonLoader v-else :type="type" />
     </span>
   </div>
 </template>

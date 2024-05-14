@@ -4,7 +4,14 @@ app:
   navigation: Navigation
 
 misc:
+  ok: ok
+  yes: Ja
+  no: Nein
   loading: Lade...
+  next: Weiter
+  back: Zurück
+  cancel: Abbrechen
+  close: Schließen
 
 route:
   home:
@@ -52,7 +59,7 @@ character-creation:
   route:
     preset:
       title: Voreinstellungen
-      form:
+      select: Voreinstellung wählen
       start: Erstellung beginnen
       restart: Erschaffung neustarten
 

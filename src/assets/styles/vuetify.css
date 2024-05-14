@@ -33,3 +33,7 @@
   margin-left: 0;
   margin-right: 0;
 }
+
+.v-field__overlay:not(:hover) {
+  opacity: 0;
+}

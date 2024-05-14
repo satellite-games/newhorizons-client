@@ -1,5 +1,6 @@
 :root {
   --color-accent: rgb(var(--v-theme-accent));
+  --color-accent-2: rgb(var(--v-theme-accent-2));
   --color-primary: rgb(var(--v-theme-primary));
   --color-secondary: rgb(var(--v-theme-secondary));
 }
