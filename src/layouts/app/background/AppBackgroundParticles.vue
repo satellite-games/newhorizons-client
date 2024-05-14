@@ -50,7 +50,7 @@ const particleLayers: ParticleLayer[] = [
   left: 0;
   height: 100vh;
   width: 100vw;
-  opacity: 0.5;
+  opacity: 0.4;
 }
 
 .particle {

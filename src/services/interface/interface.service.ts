@@ -22,12 +22,10 @@ export class Interface extends ServiceMixin<Interface>() {
 
   static toggleSidebar() {
     const newValue = !Interface.instance._sidebarExpanded.value;
-    if (newValue && this.sidebarDisabled) return;
     Interface.instance._sidebarExpanded.value = newValue;
   }
 
   static setSidebarExpanded(open: boolean) {
-    if (open && this.sidebarDisabled) return;
     Interface.instance._sidebarExpanded.value = open;
   }
 

@@ -20,5 +20,6 @@ import { VMain } from 'vuetify/components';
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 </style>

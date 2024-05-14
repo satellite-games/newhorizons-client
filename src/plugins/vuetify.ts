@@ -9,8 +9,8 @@ export const vuetify = createVuetify({
           accent: '#bf00ff',
           'accent-2': '#513472',
           primary: '#00ffff',
-          secondary: '#101010',
-          surface: '#151515',
+          secondary: '#303030',
+          surface: '#202020',
           background: '#000505',
         },
         variables: {

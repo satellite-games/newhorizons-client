@@ -5,7 +5,8 @@ import Loader, { type LoaderType } from '../common/Loader.vue';
 const props = defineProps<{
   title?: string;
   size?: 'small' | 'medium' | 'large' | 'auto' | 'max';
-  elevation?: number;
+  color?: string;
+  elevation?: string;
   state?: Resource;
   loaderType?: LoaderType;
 }>();
@@ -18,6 +19,7 @@ const elevation = props.elevation ?? 10;
   <VSheet
     :class="[$style.container, 'pa-4', 'pa-sm-6', 'pa-md-8', $style[size]]"
     :elevation
+    :color
     rounded
   >
     <Loader v-if="state === null || state === 'pending'" :type="loaderType" />

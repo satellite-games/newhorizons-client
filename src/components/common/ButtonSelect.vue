@@ -92,4 +92,9 @@ const handleSelect = () => {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }
+
+.button:last-of-type {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
 </style>
