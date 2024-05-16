@@ -15,10 +15,11 @@ import { VDivider, VRow, VCol, VBtn, VCard } from 'vuetify/components';
         to="/stellarpedia/basic-rules/introduction/about-the-game"
         size="large"
         color="secondary"
+        elevation="25"
       >
         {{ $t('route.home.quickstart.more') }}
       </VBtn>
-      <VBtn to="/create-character" size="large" color="primary">
+      <VBtn to="/create-character" size="large" color="primary" elevation="25">
         {{ $t('route.home.quickstart.start') }}
       </VBtn>
     </div>

@@ -32,6 +32,7 @@ const handlePresetSelect = (preset: CharacterPreset) => {
         :defaultItem="characterPresets[0]"
         itemTitle="name"
         itemValue="name"
+        color="secondary"
         :onSelect="handlePresetSelect"
       />
 

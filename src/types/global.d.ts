@@ -16,5 +16,5 @@ declare global {
   /**
    * A color is a string that represents a color in the Vuetify theme.
    */
-  export type Color = 'accent' | 'accent-2' | 'primary' | 'secondary';
+  export type Color = 'accent' | 'primary' | 'secondary' | 'surface';
 }

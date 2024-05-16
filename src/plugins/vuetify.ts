@@ -7,9 +7,8 @@ export const vuetify = createVuetify({
       dark: {
         colors: {
           accent: '#bf00ff',
-          'accent-2': '#513472',
           primary: '#00ffff',
-          secondary: '#303030',
+          secondary: '#101010',
           surface: '#202020',
           background: '#000505',
         },
@@ -21,7 +20,6 @@ export const vuetify = createVuetify({
       light: {
         colors: {
           accent: '#bf00ff',
-          'accent-2': '#513472',
           primary: '#00ffff',
           secondary: '#513472',
           surface: '#151515',

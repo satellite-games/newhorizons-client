@@ -60,7 +60,7 @@ character-creation:
     preset:
       title: Voreinstellungen
       select: Voreinstellung wählen
-      start: Erstellung beginnen
+      start: Erschaffung beginnen
       restart: Erschaffung neustarten
 
 stellarpedia:
