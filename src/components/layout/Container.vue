@@ -39,7 +39,6 @@ const elevation = props.elevation ?? 10;
 <style module>
 .container {
   max-width: 100%;
-  z-index: var(--z-index-container);
   background: rgba(var(--v-theme-surface), var(--v-container-overlay-multiplier));
 }
 

@@ -14,6 +14,7 @@ import { VMain } from 'vuetify/components';
   max-width: 1440px;
   width: 100%;
   margin: auto;
+  z-index: var(--z-index-main-content);
 }
 
 .main-content-inner {

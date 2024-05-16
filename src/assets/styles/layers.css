@@ -1,5 +1,5 @@
 :root {
-  --z-index-background: 1;
+  --z-index-app-background: 1;
 
-  --z-index-container: 11;
+  --z-index-main-content: 11;
 }

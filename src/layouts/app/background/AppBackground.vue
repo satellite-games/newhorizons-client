@@ -19,6 +19,6 @@ import AppBackgroundSlideshow from './AppBackgroundSlideshow.vue';
   height: 100vh;
   width: 100vw;
   pointer-events: none;
-  z-index: var(--z-index-background);
+  z-index: var(--z-index-app-background);
 }
 </style>
