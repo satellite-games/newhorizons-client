@@ -28,7 +28,7 @@ getBooks();
 </script>
 
 <template>
-  <SidebarTeleport open>
+  <SidebarTeleport expand>
     <VSelect
       class="book-select"
       :label="$t('stellarpedia.sidebar.book')"

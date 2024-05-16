@@ -1,35 +1,28 @@
 import { ServiceMixin } from '@spuxx/browser-utils';
-import { ref, watch } from 'vue';
-import { useRoute, type RouteRecordName } from 'vue-router';
+import { ref, type Ref } from 'vue';
 
 export class Interface extends ServiceMixin<Interface>() {
   private _sidebarExpanded = ref(false);
-  private _sidebarDisabled = ref(false);
-
-  constructor() {
-    super();
-    const route = useRoute();
-    watch(route, () => {
-      const routesWithoutSidebar: Array<RouteRecordName | null | undefined> = ['/'];
-      this._sidebarDisabled.value = routesWithoutSidebar.includes(route.path);
-      if (this._sidebarDisabled.value) Interface.setSidebarExpanded(false);
-    });
-  }
-
-  static get sidebarExpanded() {
-    return Interface.instance._sidebarExpanded;
-  }
+  private _sidebarEnabled = ref(false);
 
   static toggleSidebar() {
     const newValue = !Interface.instance._sidebarExpanded.value;
     Interface.instance._sidebarExpanded.value = newValue;
   }
 
+  static get sidebarExpanded(): Ref<boolean> {
+    return this.sidebarEnabled.value ? this.instance._sidebarExpanded : this.sidebarEnabled;
+  }
+
   static setSidebarExpanded(open: boolean) {
     Interface.instance._sidebarExpanded.value = open;
   }
 
-  static get sidebarDisabled() {
-    return this.instance._sidebarDisabled;
+  static get sidebarEnabled(): Ref<boolean> {
+    return this.instance._sidebarEnabled;
+  }
+
+  static setSidebarEnabled(value: boolean) {
+    Interface.instance._sidebarEnabled.value = value;
   }
 }

@@ -8,8 +8,7 @@ import { useDisplay } from 'vuetify';
 import { RouterLink } from 'vue-router';
 
 const { mobile } = useDisplay();
-const { toggleSidebar, sidebarDisabled } = Interface;
-console.log(sidebarDisabled);
+const { toggleSidebar, sidebarEnabled } = Interface;
 </script>
 <template>
   <VAppBar :class="$style.header">
@@ -19,7 +18,7 @@ console.log(sidebarDisabled);
         <p :class="$style.title">{{ $t('app.title') }}</p>
       </RouterLink>
       <VBtn
-        v-if="!sidebarDisabled"
+        v-if="sidebarEnabled"
         :class="$style['sidebar-toggle']"
         icon
         variant="text"

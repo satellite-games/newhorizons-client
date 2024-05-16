@@ -8,7 +8,7 @@ const { creationInProgress } = CharacterCreator;
 </script>
 
 <template>
-  <SidebarTeleport open>
+  <SidebarTeleport expand>
     <VList>
       <VListItem link to="/create-character/preset">
         <template v-slot:title> {{ $t('character-creation.route.preset.title') }} </template>
