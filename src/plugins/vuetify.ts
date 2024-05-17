@@ -15,6 +15,8 @@ export const vuetify = createVuetify({
         variables: {
           'border-opacity': 0.8,
           'container-overlay-multiplier': 0.9,
+          'theme-primary-overlay-multiplier': 1,
+          'theme-secondary-overlay-multiplier': 1,
         },
       },
       light: {

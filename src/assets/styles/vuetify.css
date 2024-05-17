@@ -34,6 +34,7 @@
   margin-right: 0;
 }
 
+.v-btn--active > .v-btn__overlay,
 .v-field__overlay:not(:hover) {
   opacity: 0;
 }
