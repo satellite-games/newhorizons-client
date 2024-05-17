@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { Interface } from '@/services/interface';
+import { useDisplay } from 'vuetify';
 
 const props = defineProps<{ expand: boolean }>();
+const { mobile } = useDisplay();
 
 const { expand } = props;
-if (expand) Interface.setSidebarExpanded(true);
+if (expand && !mobile.value) Interface.setSidebarExpanded(true);
 </script>
 
 <template>
