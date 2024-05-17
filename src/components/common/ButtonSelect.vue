@@ -5,8 +5,8 @@ import { VBtn, VSelect } from 'vuetify/components';
 
 const props = defineProps<{
   label: string;
-  items: Object[];
-  defaultItem?: Object;
+  items: Record<string, unknown>[];
+  defaultItem?: Record<string, unknown>;
   itemTitle: string;
   itemValue: string;
   itemIcon?: string;
@@ -14,27 +14,24 @@ const props = defineProps<{
   onSelect: (value: any) => void;
 }>();
 
-// @ts-expect-error - The type of the items as well as their properties are unknown
-const selectedValue = ref<string | null>(props.defaultItem[props.itemValue] ?? null);
+const selectedValue = ref<string | null>(
+  props.defaultItem ? (props.defaultItem[props.itemValue] as string) : null,
+);
 const color: Color = props.color ?? 'secondary';
 
 const selectNextOrPrevious = (change: 1 | -1) => {
   if (selectedValue.value) {
-    const index = props.items.indexOf(selectedValue.value);
+    const index = props.items.findIndex((item) => (item[props.itemValue] = selectedValue.value));
     let newIndex = index + change;
-    console.log(index);
     if (newIndex >= props.items.length) newIndex = 0;
     else if (newIndex < 0) newIndex = props.items.length - 1;
-    // @ts-expect-error - The type of the items as well as their properties are unknown
-    selectedValue.value = props.items[newIndex][props.itemValue];
-    // @ts-expect-error - The type of the items as well as their properties are unknown
-  } else selectedValue.value = props.items[0][props.itemValue];
+    selectedValue.value = props.items[newIndex][props.itemValue] as string;
+  } else selectedValue.value = props.items[0][props.itemValue] as string;
   handleSelect();
 };
 
 const handleSelect = () => {
   if (!selectedValue.value) return;
-  // @ts-expect-error - The type of the items as well as their properties are unknown
   const selectedItem = props.items.find((item) => item[props.itemValue] === selectedValue.value);
   if (selectedItem) props.onSelect(selectedItem);
 };
