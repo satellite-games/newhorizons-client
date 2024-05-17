@@ -1,46 +1,24 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { CharacterPreset } from '@newhorizons/core';
+import { CharacterPreset, type Blueprint } from '@newhorizons/core';
 import Container from '@/components/layout/Container.vue';
-import { VBtn, VForm } from 'vuetify/components';
-import { CharacterCreator } from '../services/character-creator';
-import ButtonSelect from '@/components/common/ButtonSelect.vue';
-import { loadResource } from '@/utils/misc.utils';
 import { GameDataProvider } from '@/services/game-data-provider';
+import CharacterPresetForm from './components/CharacterPresetForm.vue';
+import { Resource } from '@/reactivity/resource';
+import { sleep } from '@spuxx/browser-utils';
 
-const { creationInProgress } = CharacterCreator;
-const characterPresets = ref<Resource<CharacterPreset[]>>(null);
-loadResource(characterPresets, async () => {
+const characterPresets = new Resource<Blueprint<CharacterPreset>[]>(async () => {
+  await sleep(5000);
   return await GameDataProvider.getBlueprints('characterPresets');
-});
-
-const handlePresetSelect = (preset: CharacterPreset) => {
-  console.log(preset);
-};
+}, 'characterPresets');
+characterPresets.load();
 </script>
 <template>
   <Container
     :title="$t('character-creation.route.preset.title')"
+    :resource="characterPresets"
     size="medium"
-    :state="characterPresets"
     loaderType="article"
   >
-    <VForm v-if="Array.isArray(characterPresets)">
-      <ButtonSelect
-        :label="$t('character-creation.route.preset.select')"
-        :items="characterPresets"
-        :defaultItem="characterPresets[0]"
-        itemTitle="name"
-        itemValue="name"
-        color="secondary"
-        :onSelect="handlePresetSelect"
-      />
-
-      <footer class="d-flex justify-center">
-        <VBtn to="/create-character" size="large" color="primary">
-          {{ $t(`character-creation.route.preset.${creationInProgress ? 'restart' : 'start'}`) }}
-        </VBtn>
-      </footer>
-    </VForm>
+    <CharacterPresetForm v-if="characterPresets.data" :characterPresets="characterPresets.data" />
   </Container>
 </template>

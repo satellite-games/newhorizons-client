@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import { VDivider, VSheet } from 'vuetify/components';
 import Loader, { type LoaderType } from '../common/Loader.vue';
+import type { Resource } from '@/reactivity/resource';
 
 const props = defineProps<{
   title?: string;
   size?: 'small' | 'medium' | 'large' | 'auto' | 'max';
   color?: string;
   elevation?: string;
-  state?: Resource;
+  resource?: Resource<object>;
   loaderType?: LoaderType;
 }>();
 
@@ -22,8 +23,9 @@ const elevation = props.elevation ?? 10;
     :color
     rounded
   >
-    <Loader v-if="state === null || state === 'pending'" :type="loaderType" />
-    <span v-else-if="state === 'failed'">
+    <!-- {{ resource?.state }} -->
+    <Loader v-if="resource" :type="loaderType" />
+    <span v-else-if="resource?.state.value === 'failed'">
       {{ $t('error.content-load-failure') }}
     </span>
     <section v-else>

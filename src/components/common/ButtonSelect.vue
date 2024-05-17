@@ -3,37 +3,44 @@ import { Icon } from '@iconify/vue/dist/iconify.js';
 import { ref } from 'vue';
 import { VBtn, VSelect } from 'vuetify/components';
 
-const props = defineProps<{
-  label: string;
-  items: Record<string, unknown>[];
-  defaultItem?: Record<string, unknown>;
-  itemTitle: string;
-  itemValue: string;
-  itemIcon?: string;
-  color?: Color;
-  onSelect: (value: any) => void;
-}>();
+export interface ButtonSelectOption {
+  title: string;
+  value: string;
+}
 
-const selectedValue = ref<string | null>(
-  props.defaultItem ? (props.defaultItem[props.itemValue] as string) : null,
+const props = withDefaults(
+  defineProps<{
+    label: string;
+    options?: ButtonSelectOption[];
+    defaultKey?: string;
+    color?: Color;
+    required?: boolean;
+    onSelect: (selectedOption: ButtonSelectOption) => void;
+  }>(),
+  {
+    color: 'secondary',
+  },
 );
-const color: Color = props.color ?? 'secondary';
+
+const selectedValue = ref<string | null>(props.defaultKey ?? null);
 
 const selectNextOrPrevious = (change: 1 | -1) => {
+  if (!props.options) return;
   if (selectedValue.value) {
-    const index = props.items.findIndex((item) => (item[props.itemValue] = selectedValue.value));
+    const index = props.options.findIndex((option) => option.value === selectedValue.value);
     let newIndex = index + change;
-    if (newIndex >= props.items.length) newIndex = 0;
-    else if (newIndex < 0) newIndex = props.items.length - 1;
-    selectedValue.value = props.items[newIndex][props.itemValue] as string;
-  } else selectedValue.value = props.items[0][props.itemValue] as string;
-  handleSelect();
+    if (newIndex >= props.options.length) newIndex = 0;
+    else if (newIndex < 0) newIndex = props.options.length - 1;
+    selectedValue.value = props.options[newIndex].value;
+  } else selectedValue.value = props.options[0].value;
+  handleSelect(selectedValue.value);
 };
 
-const handleSelect = () => {
-  if (!selectedValue.value) return;
-  const selectedItem = props.items.find((item) => item[props.itemValue] === selectedValue.value);
-  if (selectedItem) props.onSelect(selectedItem);
+const handleSelect = (value: string) => {
+  console.log(value);
+  if (!selectedValue.value || !props.options) return;
+  const selectedOption = props.options.find((item) => item.value === selectedValue.value);
+  if (selectedOption) props.onSelect(selectedOption);
 };
 </script>
 
@@ -50,10 +57,9 @@ const handleSelect = () => {
     <VSelect
       :class="$style.select"
       :label
-      :items
-      :itemTitle
-      :itemValue
+      :items="options"
       :bgColor="color"
+      :required
       variant="solo-filled"
       v-model="selectedValue"
       @update:modelValue="handleSelect"
