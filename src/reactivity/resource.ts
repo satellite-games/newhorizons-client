@@ -1,5 +1,5 @@
 import { debug } from '@spuxx/browser-utils';
-import { ReactiveEffect, reactive, ref, type UnwrapNestedRefs, type UnwrapRef } from 'vue';
+import { reactive, ref, type UnwrapNestedRefs } from 'vue';
 
 export const ResourceState = {
   initial: 'initial',

@@ -1,25 +1,26 @@
 <script setup lang="ts">
-import type { Resource } from '@/reactivity/resource';
+import type { ResourceState } from '@/reactivity/resource';
 import { Icon } from '@iconify/vue/dist/iconify.js';
+import type { Ref } from 'vue';
 import { VSkeletonLoader } from 'vuetify/components';
 export type LoaderType = VProps<typeof VSkeletonLoader>['type'] | 'spinner';
 
 const props = defineProps<{
-  resource?: Resource<object>;
+  state?: Ref<ResourceState>;
   type?: LoaderType;
 }>();
 const { state, type } = {
-  state: props.resource?.state.value ?? 'pending',
+  state: props.state?.value ?? 'pending',
   type: props.type ?? 'spinner',
 };
 </script>
 <template>
-  <span v-if="state === 'pending'" :class="$style.loader" :aria-label="$t('misc.loading')">
-    <Icon v-if="type === 'spinner'" :class="$style.spinner" icon="svg-spinners:270-ring" />
-    <VSkeletonLoader v-else :type="type" />
+  <span v-if="state === 'pending'" class="loader" :aria-label="$t('misc.loading')">
+    <Icon v-if="type === 'spinner'" class="spinner" icon="svg-spinners:270-ring" />
+    <VSkeletonLoader class="skeleton" v-else :type="type" />
   </span>
 </template>
-<style module>
+<style scoped>
 .loader {
   display: flex;
   flex-direction: column;
@@ -27,5 +28,8 @@ const { state, type } = {
 }
 .spinner {
   font-size: x-large;
+}
+.skeleton {
+  width: 100%;
 }
 </style>

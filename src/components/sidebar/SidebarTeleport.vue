@@ -2,7 +2,7 @@
 import { Interface } from '@/services/interface';
 import { useDisplay } from 'vuetify';
 
-const props = defineProps<{ expand: boolean }>();
+const props = defineProps<{ expand?: boolean }>();
 const { mobile } = useDisplay();
 
 const { expand } = props;

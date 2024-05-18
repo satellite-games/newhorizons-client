@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue/dist/iconify.js';
+import { VSelect } from 'vuetify/components';
+import FieldButton from './FieldButton.vue';
+import { computed } from 'vue';
 import { ref } from 'vue';
-import { VBtn, VSelect } from 'vuetify/components';
+import { watch } from 'vue';
 
 export interface ButtonSelectOption {
   title: string;
@@ -12,67 +14,78 @@ const props = withDefaults(
   defineProps<{
     label: string;
     options?: ButtonSelectOption[];
-    defaultKey?: string;
+    selectedValue?: string;
     color?: Color;
     required?: boolean;
-    onSelect: (selectedOption: ButtonSelectOption) => void;
+    disabled?: boolean;
+    rules?: Array<(value: string) => string | boolean>;
+    onSelect: (value: string) => void;
   }>(),
   {
     color: 'secondary',
   },
 );
+// const selectedValue = computed(() => props.selectedValue);
+const selectedValue = ref(props.selectedValue);
+watch(
+  () => props.selectedValue,
+  (newVal) => {
+    selectedValue.value = newVal;
+  },
+);
 
-const selectedValue = ref<string | null>(props.defaultKey ?? null);
-
-const selectNextOrPrevious = (change: 1 | -1) => {
+const selectNextOrPrevious = (change: number) => {
   if (!props.options) return;
+  let newValue: undefined | string;
   if (selectedValue.value) {
     const index = props.options.findIndex((option) => option.value === selectedValue.value);
     let newIndex = index + change;
     if (newIndex >= props.options.length) newIndex = 0;
     else if (newIndex < 0) newIndex = props.options.length - 1;
-    selectedValue.value = props.options[newIndex].value;
-  } else selectedValue.value = props.options[0].value;
-  handleSelect(selectedValue.value);
+    newValue = props.options[newIndex].value;
+  } else newValue = props.options[0].value;
+  handleSelect(newValue);
 };
 
 const handleSelect = (value: string) => {
-  console.log(value);
-  if (!selectedValue.value || !props.options) return;
-  const selectedOption = props.options.find((item) => item.value === selectedValue.value);
-  if (selectedOption) props.onSelect(selectedOption);
+  if (value) {
+    selectedValue.value = value;
+    props.onSelect(value);
+  }
 };
 </script>
-
 <template>
   <div :class="$style['button-select']">
-    <VBtn
-      :class="$style.button"
-      variant="flat"
-      :color="color"
-      @click="() => selectNextOrPrevious(-1)"
-    >
-      <Icon icon="mdi:chevron-left" :title="$t('misc.back')" />
-    </VBtn>
+    <FieldButton
+      :color
+      :disabled
+      :value="-1"
+      :on-click="selectNextOrPrevious"
+      :title="$t('component.button-select.previous-option')"
+      icon="mdi:chevron-left"
+    />
     <VSelect
       :class="$style.select"
       :label
       :items="options"
       :bgColor="color"
       :required
+      :rules
+      :disabled
       variant="solo-filled"
       v-model="selectedValue"
       @update:modelValue="handleSelect"
     >
     </VSelect>
-    <VBtn
-      :class="$style.button"
-      variant="flat"
-      :color="color"
-      @click="() => selectNextOrPrevious(1)"
-    >
-      <Icon icon="mdi:chevron-right" :title="$t('misc.next')" />
-    </VBtn>
+    <FieldButton
+      :color
+      :disabled
+      direction="right"
+      :value="1"
+      :on-click="selectNextOrPrevious"
+      :title="$t('component.button-select.next-option')"
+      icon="mdi:chevron-right"
+    />
   </div>
 </template>
 <style module>
@@ -85,19 +98,5 @@ const handleSelect = (value: string) => {
     border-radius: 0;
     box-shadow: none;
   }
-}
-
-.button {
-  height: 56px !important;
-}
-
-.button:first-of-type {
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-}
-
-.button:last-of-type {
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
 }
 </style>

@@ -1,6 +1,6 @@
 import type { RouteRecordRaw } from 'vue-router';
 import CharacterCreationRoute from './CharacterCreationRoute.vue';
-import CharacterCreationPresetRoute from './CharacterCreationPresetRoute.vue';
+import CharacterCreationPresetRoute from './preset/CharacterCreationPresetRoute.vue';
 
 export const characterCreationRoutes: RouteRecordRaw[] = [
   {

@@ -3,8 +3,6 @@ import SidebarTeleport from '@/components/sidebar/SidebarTeleport.vue';
 import { Icon } from '@iconify/vue/dist/iconify.js';
 import { VList, VListItem } from 'vuetify/components';
 import { CharacterCreator } from '../services/character-creator/character-creator.service';
-
-const { creationInProgress } = CharacterCreator;
 </script>
 
 <template>

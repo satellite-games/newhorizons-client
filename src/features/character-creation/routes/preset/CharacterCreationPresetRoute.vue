@@ -2,12 +2,10 @@
 import { CharacterPreset, type Blueprint } from '@newhorizons/core';
 import Container from '@/components/layout/Container.vue';
 import { GameDataProvider } from '@/services/game-data-provider';
-import CharacterPresetForm from './components/CharacterPresetForm.vue';
 import { Resource } from '@/reactivity/resource';
-import { sleep } from '@spuxx/browser-utils';
+import CharacterPresetForm from './components/CharacterPresetForm.vue';
 
 const characterPresets = new Resource<Blueprint<CharacterPreset>[]>(async () => {
-  await sleep(5000);
   return await GameDataProvider.getBlueprints('characterPresets');
 }, 'characterPresets');
 characterPresets.load();
@@ -15,9 +13,9 @@ characterPresets.load();
 <template>
   <Container
     :title="$t('character-creation.route.preset.title')"
-    :resource="characterPresets"
+    :state="characterPresets.state"
     size="medium"
-    loaderType="article"
+    loaderType="spinner"
   >
     <CharacterPresetForm v-if="characterPresets.data" :characterPresets="characterPresets.data" />
   </Container>

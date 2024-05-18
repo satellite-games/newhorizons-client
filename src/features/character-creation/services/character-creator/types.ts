@@ -5,7 +5,7 @@ export const CharacterCreationProgress = {
   /**
    * Indicates that the character creation process has not yet been started.
    */
-  null: null,
+  initial: 'initial',
   /**
    * Indicates that the character creation process has been started, but the user
    * has not yet selected an origin.
@@ -15,6 +15,6 @@ export const CharacterCreationProgress = {
    * Indicates that the user has selected an origin.
    */
   postOriginSelection: 'post-origin',
-};
+} as const;
 export type CharacterCreationProgress =
   (typeof CharacterCreationProgress)[keyof typeof CharacterCreationProgress];
