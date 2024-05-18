@@ -20,7 +20,7 @@ const updateSlideshow = () => {
     slideshow.removeChild(slideshow.children[0]);
   }
   // Insert a new slide at the end
-  const newImagePath = createImagePath(Math.floor(Math.random() * IMAGES_AMOUNT));
+  const newImagePath = createImagePath(Math.floor(Math.random() * IMAGES_AMOUNT) + 1);
   const newSlide = document.createElement('span');
   newSlide.className = 'app-background-slide';
   newSlide.style.backgroundImage = `url(${newImagePath})`;
