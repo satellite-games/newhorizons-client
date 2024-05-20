@@ -18,7 +18,6 @@ export class CharacterCreator extends ServiceMixin<CharacterCreator>() {
     const character = createNewCharacter();
     this.instance._character.value = character;
     debug(`Character creation started for character ${character.id}.`, this.name);
-    console.log(CharacterCreator.instance);
   }
 
   static get progress() {

@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import ButtonSelect, { type ButtonSelectOption } from '@/components/common/ButtonSelect.vue';
 import { CharacterCreator } from '@/features/character-creation/services/character-creator';
+import router from '@/router';
 import type { Blueprint, CharacterPreset } from '@newhorizons/core';
+import { sleep } from '@spuxx/browser-utils';
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import type { SubmitEventPromise } from 'vuetify';
@@ -11,11 +13,13 @@ const props = defineProps<{
   characterPresets: Blueprint<CharacterPreset>[];
 }>();
 
+const { t } = useI18n();
+
 const characterPresets = props.characterPresets ?? [];
 if (!CharacterCreator.preset) CharacterCreator.setPreset(characterPresets[0]);
 const characterPresetOptions: ButtonSelectOption[] = characterPresets.map((preset) => ({
   value: preset.name,
-  title: preset.name,
+  title: t(preset.name),
 }));
 
 const handlePresetSelect = (value: string) => {
@@ -26,15 +30,20 @@ const handlePresetSelect = (value: string) => {
 };
 
 const form = ref<VForm>();
-const { t } = useI18n();
 const rules = {
   preset: [(value: string) => (value ? true : t('validation.selection-required'))],
 };
 
+const submitLoading = ref(false);
 const handleSubmit = async (event: SubmitEventPromise) => {
   const { valid } = await event;
   if (valid) {
+    // We include a short delay here to indicate that the creation process is starting
+    submitLoading.value = true;
+    await sleep(1000);
     CharacterCreator.start();
+    submitLoading.value = false;
+    router.push({ name: 'character-creation/origin' });
   }
 };
 
@@ -74,7 +83,7 @@ const handleReset = () => {
       >
         {{ $t('character-creation.route.preset.reset') }}
       </VBtn>
-      <VBtn v-else type="submit" size="large" color="primary">
+      <VBtn v-else type="submit" size="large" color="primary" :loading="submitLoading">
         {{ $t('character-creation.route.preset.start') }}
       </VBtn>
     </footer>

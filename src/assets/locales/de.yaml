@@ -62,6 +62,8 @@ character-creation:
       select: Voreinstellung
       start: Erschaffung beginnen
       reset: Charaktererstellung zurücksetzen
+    origin:
+      title: Herkunft
 
 stellarpedia:
   sidebar:

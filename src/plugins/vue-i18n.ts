@@ -1,5 +1,6 @@
 import { createI18n } from 'vue-i18n';
-import de from '@/assets/locales/de.yaml';
+import deApplication from '@/assets/locales/de.yaml';
+import { de as deBlueprints } from '@newhorizons/core/locales';
 
 export const supportedLocales = ['de'];
 
@@ -9,6 +10,8 @@ function getLocale() {
   return supportedLocales.includes(userLocale) ? userLocale : 'de';
 }
 
+const de = { ...deApplication, ...deBlueprints };
+console.log(de);
 export const i18n = createI18n({
   legacy: false,
   locale: getLocale(),

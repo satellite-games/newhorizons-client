@@ -26,5 +26,8 @@ h6 {
 p a,
 p a:visited {
   color: var(--color-primary);
+}
+
+p a:not(:hover) {
   text-decoration: none;
 }
