@@ -15,7 +15,6 @@ const renderBackground = !mobile.value;
   <AppHeader />
   <AppSidebar />
   <AppModal />
-  <AppMainContent>
-    <slot></slot>
-  </AppMainContent>
+  <AppMainContent />
+  <slot></slot>
 </template>

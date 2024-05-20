@@ -2,25 +2,17 @@
 import { VMain } from 'vuetify/components';
 </script>
 <template>
-  <VMain class="main-content">
-    <div class="main-content-inner pa-2 pa-sm-4 pa-md-8">
-      <slot></slot>
-    </div>
-  </VMain>
+  <VMain id="main-content"></VMain>
 </template>
 
 <style>
-.main-content {
+#main-content {
   max-width: 1440px;
-  width: 100%;
+  width: calc(100% - var(--v-layout-left));
   margin: auto;
   z-index: var(--z-index-main-content);
-}
-
-.main-content-inner {
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  align-items: center;
+  box-sizing: content-box;
 }
 </style>

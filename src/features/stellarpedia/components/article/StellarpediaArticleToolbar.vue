@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue/dist/iconify.js';
+import { VBtn } from 'vuetify/components';
 
 const props = defineProps<{
   book: string;

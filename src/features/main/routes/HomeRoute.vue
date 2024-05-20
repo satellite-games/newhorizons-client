@@ -1,8 +1,11 @@
 <script setup lang="ts">
+import PageContent from '@/components/app/PageContent.vue';
 import MainSidebar from '../sidebar/MainSidebar.vue';
 </script>
 
 <template>
   <MainSidebar />
-  <h1>This is the home page</h1>
+  <PageContent>
+    <h1>This is the home page</h1>
+  </PageContent>
 </template>

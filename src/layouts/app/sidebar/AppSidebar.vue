@@ -37,7 +37,6 @@ watch([route, mobile], watchRouteAndMobile);
       <VDivider />
     </div>
     <div id="sidebar-content"></div>
-    <slot></slot>
   </VNavigationDrawer>
 </template>
 
