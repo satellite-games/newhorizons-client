@@ -64,6 +64,20 @@ character-creation:
       reset: Charaktererstellung zurücksetzen
     origin:
       title: Herkunft
+    general:
+      title: Persönliches
+    attributes:
+      title: Attribute
+    traits:
+      title: Merkmale
+    skills:
+      title: Fähigkeiten
+    abilities:
+      title: Sonderfertigkeiten
+    inventory:
+      title: Ausrüstung & Besitz
+    finish:
+      title: Abschluss
 
 stellarpedia:
   sidebar:

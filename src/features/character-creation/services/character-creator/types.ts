@@ -5,16 +5,16 @@ export const CharacterCreationProgress = {
   /**
    * Indicates that the character creation process has not yet been started.
    */
-  initial: 'initial',
+  initial: 0,
   /**
    * Indicates that the character creation process has been started, but the user
    * has not yet selected an origin.
    */
-  preOriginSelection: 'pre-origin',
+  presetSelected: 5,
   /**
    * Indicates that the user has selected an origin.
    */
-  postOriginSelection: 'post-origin',
+  originSelected: 10,
 } as const;
 export type CharacterCreationProgress =
   (typeof CharacterCreationProgress)[keyof typeof CharacterCreationProgress];

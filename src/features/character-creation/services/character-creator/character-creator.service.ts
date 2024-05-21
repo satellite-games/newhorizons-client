@@ -7,7 +7,7 @@ import { Character, CharacterPreset, createNewCharacter, type Blueprint } from '
  * `CharacterCreator` is responsible for managing the character creation process.
  */
 export class CharacterCreator extends ServiceMixin<CharacterCreator>() {
-  private _progress = ref<CharacterCreationProgress>('initial');
+  private _progress = ref<CharacterCreationProgress>(CharacterCreationProgress.initial);
   private _preset = ref<Blueprint<CharacterPreset> | null>(null);
   private _character = ref<Character | null>(null);
 
@@ -17,6 +17,7 @@ export class CharacterCreator extends ServiceMixin<CharacterCreator>() {
   static start() {
     const character = createNewCharacter();
     this.instance._character.value = character;
+    this.setProgress(CharacterCreationProgress.presetSelected);
     debug(`Character creation started for character ${character.id}.`, this.name);
   }
 
@@ -43,7 +44,7 @@ export class CharacterCreator extends ServiceMixin<CharacterCreator>() {
    * Resets the character creation process. All progress will be lost.
    */
   static async reset() {
-    this.instance._progress.value = 'initial';
+    this.instance._progress.value = CharacterCreationProgress.initial;
     this.instance._preset.value = null;
     this.instance._character.value = null;
     debug('Character creation reset.', this.name);
@@ -59,7 +60,6 @@ export class CharacterCreator extends ServiceMixin<CharacterCreator>() {
    */
   static setPreset(preset: Blueprint<CharacterPreset>) {
     this.instance._preset.value = preset;
-    this.setProgress('pre-origin');
     debug(`Character preset set to '${preset.name}'.`, this.name);
   }
 }
