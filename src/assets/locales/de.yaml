@@ -56,22 +56,31 @@ character-creation:
       custom: Benutzerdefiniert
       attribute-points:
         label: Attributpunkte
+        hint: Die Anzahl der Punkte, die Du auf Primärattribute verteilen kannst.
       trait-points:
         label: Merkmalspunkte
+        hint: Die Anzahl der Punkte, für die Du Merkmale sowie Sonderfertigkeiten erwerben oder steigern kannst.
       interest-points:
         label: Interessenpunkte
+        hint: Die Anzahl der Punkte, für die Du Fähigkeiten erwerben oder steigern kannst.
       traits-minimum:
         label: Mindestanzahl Merkmale
+        hint: Die Mindestanzahl an Merkmalen, die Dein Charakter haben muss.
       traits-maximum:
         label: Höchstanzahl Merkmale
+        hint: Die Höchstanzahl an Merkmalen, die Dein Charakter haben kann.
       abilities-maximum:
         label: Höchstanzahl Sonderfertigkeiten
+        hint: Die Höchstanzahl an Sonderfertigkeiten, die Dein Charakter haben kann.
       bonus-credits:
         label: Bonus-Credits
+        hint: Die Anzahl an Credits, die Du zusätzlich zu Deinem üblichen Startkapital erhältst.
       start-experience:
         label: Start-Erfahrung
+        hint: Die Anzahl an Erfahrungspunkten, die Du zu Beginn des Spiels erhältst.
       start-fate-points:
         label: Start-Schicksalspunkte
+        hint: Die Anzahl an Schicksalspunkten, die Du zu Beginn des Spiels erhältst.
       start: Erschaffung beginnen
       reset: Charaktererstellung zurücksetzen
     origin:

@@ -9,6 +9,7 @@ import type { SubmitEventPromise } from 'vuetify';
 import { VBtn, VForm } from 'vuetify/components';
 import CharacterPresetCustomizationPanel from './CharacterPresetCustomizationPanel.vue';
 import formConfig from './form-config';
+import { createSelectValidationRules } from '@/utils/form.utils';
 
 const props = defineProps<{
   characterPresets: Blueprint<CharacterPreset>[];
@@ -58,8 +59,13 @@ const handleReset = () => {
   >
     <ButtonSelect
       :label="intl('character-creation.route.preset.select')"
+      :selected-value="CharacterCreator.preset.name"
       :options="characterPresetOptions"
-      :rules="formConfig.rules.preset"
+      :rules="
+        createSelectValidationRules({
+          required: true,
+        })
+      "
       color="secondary"
       required
       :disabled="CharacterCreator.creationInProgress"
