@@ -59,7 +59,7 @@ export class CharacterCreator extends ServiceMixin<CharacterCreator>() {
    * @param preset The preset to set.
    */
   static setPreset(preset: Blueprint<CharacterPreset>) {
-    this.instance._preset.value = preset;
+    this.instance._preset.value = { ...preset };
     debug(`Character preset set to '${preset.name}'.`, this.name);
   }
 }

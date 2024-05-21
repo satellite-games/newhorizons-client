@@ -8,6 +8,7 @@ import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import type { SubmitEventPromise } from 'vuetify';
 import { VBtn, VForm } from 'vuetify/components';
+import CharacterPresetCustomizationPanel from './CharacterPresetCustomizationPanel.vue';
 
 const props = defineProps<{
   characterPresets: Blueprint<CharacterPreset>[];
@@ -58,7 +59,6 @@ const handleReset = () => {
     ref="form"
     v-if="Array.isArray(characterPresets) && CharacterCreator.preset"
     @submit.prevent="handleSubmit"
-    class="form"
     :disabled="CharacterCreator.creationInProgress"
   >
     <ButtonSelect
@@ -71,6 +71,8 @@ const handleReset = () => {
       :disabled="CharacterCreator.creationInProgress"
       :on-select="handlePresetSelect"
     />
+
+    <CharacterPresetCustomizationPanel />
 
     <footer class="d-flex justify-center">
       <VBtn
@@ -89,9 +91,3 @@ const handleReset = () => {
     </footer>
   </VForm>
 </template>
-
-<style scoped>
-.form > *:not(:first-child) {
-  margin-top: 1rem;
-}
-</style>
