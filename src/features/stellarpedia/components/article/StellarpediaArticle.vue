@@ -57,5 +57,13 @@ watch(props, load, { immediate: true });
   :global(a) {
     color: rgb(var(--v-theme-primary));
   }
+
+  :global(blockquote) {
+    background: linear-gradient(
+      to-right,
+      rgb(var(--v-theme-primary3)),
+      rgb(var(--v-theme-accent3))
+    );
+  }
 }
 </style>
