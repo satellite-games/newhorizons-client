@@ -30,7 +30,7 @@ const handleClick = (snack: Snack) => {
       <VScaleTransition appear>
         <VCard class="snack" role="alert" :color="snack.type" @click="handleClick(snack)">
           <Icon :icon="getIcon(snack.type)" class="icon" />
-          <p>{{ snack.message }}</p>
+          <p class="text">{{ snack.message }}</p>
           <span class="timer" :style="{ animationDuration: `${snack.timeout}ms` }"></span>
         </VCard>
       </VScaleTransition>
@@ -56,9 +56,13 @@ const handleClick = (snack: Snack) => {
   max-width: 20rem;
 }
 
+.text {
+  flex-grow: 1;
+}
+
 .icon {
   height: 100%;
-  width: 3.5rem;
+  width: 1.5rem;
   margin-right: 0.5rem;
 }
 
