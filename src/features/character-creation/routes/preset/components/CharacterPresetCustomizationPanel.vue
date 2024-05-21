@@ -167,7 +167,7 @@ const createRules = (min: number, max: number) => {
 
 <style scoped>
 .panels {
-  margin: 1rem 0;
+  margin-bottom: 1.5rem;
 
   :global(.v-expansion-panel-text__wrapper) {
     padding: 1rem 2rem;
