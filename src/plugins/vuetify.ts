@@ -26,6 +26,10 @@ export const vuetify = createVuetify({
           secondary3: '#393939',
           surface: '#212121',
           background: colors.shades.black,
+          success: colors.green.accent3,
+          error: colors.red.darken1,
+          warning: colors.orange.accent2,
+          info: colors.cyan.darken3,
         },
         variables: {
           'border-opacity': 0.8,
