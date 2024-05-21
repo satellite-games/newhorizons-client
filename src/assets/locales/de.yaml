@@ -95,6 +95,12 @@ stellarpedia:
   title: Stellarpedia
   sidebar:
     book: Buch
+  route:
+    article:
+      share:
+        title: Artikel teilen
+        success: Link wurde kopiert!
+        error: Das hat leider nicht geklappt. Möglicherweise unterstützt Dein Browser diese Funktion nicht.
 
 error:
   content-load-failure: Der Inhalt konnte nicht geladen werden. Bitte versuche es später erneut.

@@ -1,5 +1,8 @@
 <script setup lang="ts">
+import { Snacks } from '@/services/snacks/snacks.service';
 import { Icon } from '@iconify/vue/dist/iconify.js';
+import { Logger } from '@spuxx/browser-utils';
+import { useI18n } from 'vue-i18n';
 import { VBtn } from 'vuetify/components';
 
 const props = defineProps<{
@@ -8,8 +11,24 @@ const props = defineProps<{
   article: string;
 }>();
 
-const share = () => {
-  console.log('Share');
+const { t } = useI18n();
+
+const share = async () => {
+  try {
+    const url = window.location.href;
+    navigator.clipboard.writeText(url);
+    Snacks.add({
+      message: t('stellarpedia.route.article.share.success'),
+      timeout: 2500,
+      type: 'success',
+    });
+  } catch (error) {
+    Logger.error(error as string, 'StellarpediaArticleToolbar');
+    Snacks.add({
+      message: t('stellarpedia.route.article.share.error'),
+      type: 'error',
+    });
+  }
 };
 </script>
 <template>
@@ -27,12 +46,12 @@ const share = () => {
 .toolbar {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-bottom: 0.5rem;
 }
 
 .breadcrumps {
   font-size: smaller;
   color: rgb(var(--v-theme-plain));
-  /* opacity: var(--v-disabled-opacity); */
 }
 </style>
