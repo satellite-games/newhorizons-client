@@ -17,7 +17,7 @@ export const vuetify = createVuetify({
         colors: {
           accent: colors.purple.accent2,
           accent2: colors.purple.accent4,
-          accent3: colors.purple.darken4,
+          accent3: colors.deepPurple.darken4,
           primary: colors.cyan.accent2,
           primary2: colors.cyan.darken2,
           primary3: colors.cyan.darken4,
@@ -33,6 +33,7 @@ export const vuetify = createVuetify({
         },
         variables: {
           'border-opacity': 0.8,
+          'border-radius': '4px',
           'container-overlay-multiplier': 0.9,
           'theme-primary-overlay-multiplier': 1,
           'theme-secondary-overlay-multiplier': 1,

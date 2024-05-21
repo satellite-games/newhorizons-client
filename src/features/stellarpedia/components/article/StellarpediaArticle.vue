@@ -59,11 +59,19 @@ watch(props, load, { immediate: true });
   }
 
   :global(blockquote) {
+    border-radius: var(--v-border-radius);
+    padding: 1.25rem;
+    overflow: hidden;
+    text-decoration: wavy;
     background: linear-gradient(
-      to-right,
-      rgb(var(--v-theme-primary3)),
-      rgb(var(--v-theme-accent3))
+      135deg,
+      rgb(var(--v-theme-accent3), 0.5),
+      rgb(var(--v-theme-accent), 0.3)
     );
+
+    :global(p) {
+      font-style: italic;
+    }
   }
 }
 </style>
