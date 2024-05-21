@@ -23,6 +23,7 @@ const handleUpdate = () => {
 const createRules = (min: number, max: number) => {
   return createInputValidationRules({
     required: true,
+    type: 'number',
     min,
     max,
   });

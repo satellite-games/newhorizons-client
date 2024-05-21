@@ -117,6 +117,7 @@ error:
 validation:
   selection-required: Bitte triff eine Auswahl.
   input-required: Bitte fülle dieses Feld aus.
+  input-number: Bitte gib eine Zahl ein.
   input-minimum: Bitte gib eine Zahl größer oder gleich {min} ein.
   input-maximum: Bitte gib eine Zahl kleiner oder gleich {max} ein.
 

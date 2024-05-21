@@ -19,11 +19,17 @@ export const createSelectValidationRules = (options: { required: boolean }) => {
  */
 export const createInputValidationRules = (options: {
   required?: boolean;
+  type?: 'text' | 'number';
   min?: number;
   max?: number;
 }) => {
-  const { required, min, max } = options;
+  const { required, type, min, max } = options;
   const rules: Array<(value: string | number) => string | true> = [];
+  if (type === 'number') {
+    rules.push((value: string | number) =>
+      !isNaN(parseInt(value.toString())) ? true : intl('validation.input-number'),
+    );
+  }
   if (required) {
     rules.push((value: string | number) =>
       value.toString() ? true : intl('validation.input-required'),
