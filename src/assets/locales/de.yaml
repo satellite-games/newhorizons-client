@@ -13,53 +13,65 @@ misc:
   cancel: Abbrechen
   close: Schließen
 
-# route:
-#   home:
-#     title: Home
-#     quickstart:
-#       header: Tauche ein in die Welt von <b>{highlight}</b>
-#       text: >
-#         Erstelle Deinen eigenen Charakter und erkunde die Weiten des Sonnensystems.
-#       more: Mehr erfahren
-#       start: Starten
-#     game-description:
-#       header: Was ist New Horizons?
-#       text: >
-#         New Horizons ist ein Pen-&-Paper-Rollenspiel, das heißt, die Spieler:innen verkörpern am Spieltisch fiktive Charaktere und betreten dadurch eine fantastische Welt.
-#         <br/><br/>
-#         Erzählt wird diese Welt durch die Spielleiter:in, die selbst keinen eigenen Charakter verkörpert, stattdessen aber die gesamte belebte und unbelebte Umwelt, der die Spieler:innen während eines Spielabends begegnen. Die Charaktere zeichnen sich durch individuelle Eigenschaften, Fähigkeiten und Hintergrundgeschichten aus. Die Spieler:innen reagieren auf die Erzählung der Spielleiter:in. Erfolg oder Misserfolg Ihrer Aktionen werden durch Würfelproben auf Eigenschafts- und Fähigkeitswerte bestimmt, die auf den Charakterbögen schriftlich festgehalten werden.
-#         <br/><br/>
-#         Die Spielwelt von New Horizons ist das besiedelte Sonnensystem des 23. Jahrhunderts. New Horizons verfolgt das Ziel, eine (aus naturwissenschaftlicher Perspektive) möglichst vorstellbare Zukunft zu beschreiben und erlebbar zu machen. Diese Anwendung soll es Spieler:innen ermöglichen, schnell und einfach Charaktere zu erstellen und zu verwalten. Daneben beinhaltet Sie mit der Stellarpedia ein vollständiges Nachschlagewerk für Spielregeln und Spielinhalte.
-#     actions:
-#       legacy-editor:
-#         title: Legacy-Editor
-#         text: >
-#           Lade Dir den Legacy-Editor für Windows herunter und starte direkt in Dein Abenteuer.
-#       discord:
-#         title: Discord
-#         text: >
-#           Besuche unseren Discord-Server und werde Teil der Community von New Horizons.
-#       roadmap:
-#         title: Roadmap
-#         text: >
-#           Du möchtest wissen, woran wir gerade arbeiten und was als nächstes kommt? Hier findest Du unsere Roadmap.
-#   about:
-#     title: Über uns
-
-#   create-character:
-#     title: Charakter erstellen
-
-#   edit-character:
-#     title: Charakter bearbeiten
-
-#   stellarpedia:
-#     title: Stellarpedia
+main:
+  route:
+    root:
+      quick-start:
+        header: Tauche ein in die Welt von <b>{highlight}</b>
+        text: >
+          Erstelle Deinen eigenen Charakter und erkunde die Weiten des Sonnensystems.
+        more: Mehr erfahren
+        start: Starten
+      game-description:
+        header: Was ist New Horizons?
+        text: >
+          New Horizons ist ein Pen-&-Paper-Rollenspiel, das heißt, die Spieler:innen verkörpern am Spieltisch fiktive Charaktere und betreten dadurch eine fantastische Welt.
+          <br/><br/>
+          Erzählt wird diese Welt durch die Spielleiter:in, die selbst keinen eigenen Charakter verkörpert, stattdessen aber die gesamte belebte und unbelebte Umwelt, der die Spieler:innen während eines Spielabends begegnen. Die Charaktere zeichnen sich durch individuelle Eigenschaften, Fähigkeiten und Hintergrundgeschichten aus. Die Spieler:innen reagieren auf die Erzählung der Spielleiter:in. Erfolg oder Misserfolg Ihrer Aktionen werden durch Würfelproben auf Eigenschafts- und Fähigkeitswerte bestimmt, die auf den Charakterbögen schriftlich festgehalten werden.
+          <br/><br/>
+          Die Spielwelt von New Horizons ist das besiedelte Sonnensystem des 23. Jahrhunderts. New Horizons verfolgt das Ziel, eine (aus naturwissenschaftlicher Perspektive) möglichst vorstellbare Zukunft zu beschreiben und erlebbar zu machen. Diese Anwendung soll es Spieler:innen ermöglichen, schnell und einfach Charaktere zu erstellen und zu verwalten. Daneben beinhaltet Sie mit der Stellarpedia ein vollständiges Nachschlagewerk für Spielregeln und Spielinhalte.
+      actions:
+        legacy-editor:
+          title: Legacy-Editor
+          text: >
+            Lade Dir den Legacy-Editor für Windows herunter und starte direkt in Dein Abenteuer.
+        discord:
+          title: Discord
+          text: >
+            Besuche unseren Discord-Server und werde Teil der Community von New Horizons.
+        roadmap:
+          title: Roadmap
+          text: >
+            Du möchtest wissen, woran wir gerade arbeiten und was als nächstes kommt? Hier findest Du unsere Roadmap.
+    home:
+      title: Home
 
 character-creation:
+  title: Charakter erstellen
   route:
     preset:
       title: Voreinstellungen
       select: Voreinstellung
+      customize: Einstellungen anpassen
+      custom: Benutzerdefiniert
+      attribute-points:
+        label: Attributpunkte
+      trait-points:
+        label: Merkmalspunkte
+      interest-points:
+        label: Interessenpunkte
+      traits-minimum:
+        label: Mindestanzahl Merkmale
+      traits-maximum:
+        label: Höchstanzahl Merkmale
+      abilities-maximum:
+        label: Höchstanzahl Sonderfertigkeiten
+      bonus-credits:
+        label: Bonus-Credits
+      start-experience:
+        label: Start-Erfahrung
+      start-fate-points:
+        label: Start-Schicksalspunkte
       start: Erschaffung beginnen
       reset: Charaktererstellung zurücksetzen
     origin:
@@ -80,6 +92,7 @@ character-creation:
       title: Abschluss
 
 stellarpedia:
+  title: Stellarpedia
   sidebar:
     book: Buch
 
@@ -94,3 +107,5 @@ component:
   button-select:
     previous-option: Vorherige Option
     next-option: Nächste Option
+  stellarpedia-button:
+    title: Mehr Informationen

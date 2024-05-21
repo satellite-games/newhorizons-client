@@ -8,26 +8,27 @@ import { VDivider, VRow, VCol, VBtn, VCard } from 'vuetify/components';
 <template>
   <PageContent>
     <Container :class="$style.quickstart" color="transparent" elevation="0">
-      <h1 v-html="$t('route.home.quickstart.header', { highlight: 'New Horizons.' })"></h1>
+      <h1 v-html="$t('main.route.root.quick-start.header', { highlight: 'New Horizons.' })"></h1>
       <VDivider />
-      <p>{{ $t('route.home.quickstart.text') }}</p>
+      <p>{{ $t('main.route.root.quick-start.text') }}</p>
       <VDivider class="border-opacity-0" />
       <div :class="$style['quickstart-buttons']">
         <VBtn
           to="/stellarpedia/basic-rules/introduction/about-the-game"
           size="large"
-          color="secondary"
+          color="primary"
+          variant="outlined"
           elevation="25"
         >
-          {{ $t('route.home.quickstart.more') }}
+          {{ $t('main.route.root.quick-start.more') }}
         </VBtn>
         <VBtn to="/create-character" size="large" color="primary" elevation="25">
-          {{ $t('route.home.quickstart.start') }}
+          {{ $t('main.route.root.quick-start.start') }}
         </VBtn>
       </div>
     </Container>
-    <Container style="margin-top: 100vh" :title="$t('route.home.game-description.header')">
-      <p v-html="$t('route.home.game-description.text')"></p>
+    <Container style="margin-top: 100vh" :title="$t('main.route.root.game-description.header')">
+      <p v-html="$t('main.route.root.game-description.text')"></p>
     </Container>
 
     <div :class="$style.cards">
@@ -35,12 +36,10 @@ import { VDivider, VRow, VCol, VBtn, VCard } from 'vuetify/components';
         <VCol>
           <VCard :class="$style.card">
             <template v-slot:title>
-              <!-- <p :class="$style['card-title']"> -->
-              {{ $t('route.home.actions.legacy-editor.title') }}
-              <!-- </p> -->
+              {{ $t('main.route.root.actions.legacy-editor.title') }}
             </template>
             <template v-slot:text>
-              {{ $t('route.home.actions.legacy-editor.text') }}
+              {{ $t('main.route.root.actions.legacy-editor.text') }}
             </template>
             <template v-slot:image>
               <ImageSection
@@ -57,10 +56,10 @@ import { VDivider, VRow, VCol, VBtn, VCard } from 'vuetify/components';
         <VCol>
           <VCard :class="$style.card">
             <template v-slot:title>
-              {{ $t('route.home.actions.discord.title') }}
+              {{ $t('main.route.root.actions.discord.title') }}
             </template>
             <template v-slot:text>
-              {{ $t('route.home.actions.discord.text') }}
+              {{ $t('main.route.root.actions.discord.text') }}
             </template>
             <template v-slot:image>
               <ImageSection
@@ -82,10 +81,10 @@ import { VDivider, VRow, VCol, VBtn, VCard } from 'vuetify/components';
             target="_blank"
           >
             <template v-slot:title>
-              {{ $t('route.home.actions.roadmap.title') }}
+              {{ $t('main.route.root.actions.roadmap.title') }}
             </template>
             <template v-slot:text>
-              {{ $t('route.home.actions.roadmap.text') }}
+              {{ $t('main.route.root.actions.roadmap.text') }}
             </template>
             <template v-slot:image>
               <ImageSection
@@ -128,7 +127,11 @@ import { VDivider, VRow, VCol, VBtn, VCard } from 'vuetify/components';
   h1 {
     font-size: 3rem;
     :global(b) {
-      background: linear-gradient(to right, var(--color-primary), var(--color-accent));
+      background: linear-gradient(
+        to right,
+        rgb(var(--v-theme-primary)),
+        rgb(var(--v-theme-accent2))
+      );
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;

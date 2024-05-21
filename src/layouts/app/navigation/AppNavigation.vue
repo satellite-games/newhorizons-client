@@ -9,16 +9,16 @@ const { mobile } = useDisplay();
   <VTabs :direction="mobile ? 'vertical' : 'horizontal'">
     <!-- Invisible navigation tab to represent root -->
     <AppNavigationTab to="/" style="display: none" exact />
-    <AppNavigationTab to="/home" icon="mdi:home" :title="$t('route.home.title')" />
+    <AppNavigationTab to="/home" icon="mdi:home" :title="$t('main.route.home.title')" />
     <AppNavigationTab
       to="/create-character"
       icon="mdi:account-plus"
-      :title="$t('route.create-character.title')"
+      :title="$t('character-creation.title')"
     />
     <AppNavigationTab
       to="/stellarpedia"
       icon="mdi:weather-sunny"
-      :title="$t('route.stellarpedia.title')"
+      :title="$t('stellarpedia.title')"
     />
   </VTabs>
 </template>
