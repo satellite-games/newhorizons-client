@@ -32,6 +32,9 @@ watch(props, load, { immediate: true });
 
 <style scoped>
 .article {
+  display: flex;
+  flex-direction: column;
+
   :global(> *:first-child) {
     margin-top: 0;
   }
@@ -73,6 +76,12 @@ watch(props, load, { immediate: true });
       margin-bottom: 0.5rem;
       opacity: 0.5;
     }
+  }
+
+  :global(img) {
+    max-width: 100%;
+    margin: auto;
+    border-radius: var(--v-border-radius);
   }
 }
 </style>

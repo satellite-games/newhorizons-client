@@ -69,7 +69,7 @@ export class Stellarpedia extends ServiceMixin<Stellarpedia>() {
     // Replace partial image urls will full urls
     preProcessedArticle = preProcessedArticle.replace(
       '<img src="/books/',
-      `<img src="${Config.getConfig<AppConfig>().STELLARPEDIA_BASE_URL}/`,
+      `<img class="v-card--variant-elevated" src="${Config.getConfig<AppConfig>().STELLARPEDIA_BASE_URL}/`,
     );
     // Replace article urls with correct local urls and remove filename
     preProcessedArticle = preProcessedArticle.replace('](/books/', `](/stellarpedia/`);
