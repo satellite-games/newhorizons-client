@@ -29,19 +29,33 @@ watch(props, load, { immediate: true });
   <span v-if="content === 'pending'">
     <VSkeletonLoader type="article" />
   </span>
-  <article v-else-if="content" v-html="content" :class="$style.article"></article>
+  <article v-else-if="content" v-html="content" class="article"></article>
 </template>
 
-<style module>
-.article > *:first-child {
-  margin-top: 0;
-}
+<style scoped>
+.article {
+  :global(> *:first-child) {
+    margin-top: 0;
+  }
 
-.article h1 {
-  border-bottom: 1px solid rgb(var(--v-border-color), var(--v-border-opacity));
-}
+  :global(> *:not(:first-child)) {
+    margin-top: 1em;
+  }
 
-.article > p:not(:first-child) {
-  margin-top: 1em;
+  :global(> h1) {
+    border-bottom: 1px solid rgb(var(--v-border-color), var(--v-border-opacity));
+  }
+
+  :global(ul) {
+    padding-left: 2rem;
+
+    :global(li:not(:first-child)) {
+      margin-top: 0.5rem;
+    }
+  }
+
+  :global(a) {
+    color: rgb(var(--v-theme-primary));
+  }
 }
 </style>
