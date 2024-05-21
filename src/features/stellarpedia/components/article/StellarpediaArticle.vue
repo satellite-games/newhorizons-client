@@ -71,6 +71,7 @@ watch(props, load, { immediate: true });
 
     :global(p) {
       font-style: italic;
+      opacity: 0.8;
     }
   }
 }
