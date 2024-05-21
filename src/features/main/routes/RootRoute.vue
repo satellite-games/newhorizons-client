@@ -2,15 +2,16 @@
 import PageContent from '@/components/app/PageContent.vue';
 import ImageSection from '@/components/display/ImageSection.vue';
 import Container from '@/components/layout/Container.vue';
+import { intl } from '@spuxx/browser-utils';
 import { VDivider, VRow, VCol, VBtn, VCard } from 'vuetify/components';
 </script>
 
 <template>
   <PageContent>
     <Container :class="$style.quickstart" color="transparent" elevation="0">
-      <h1 v-html="$t('main.route.root.quick-start.header', { highlight: 'New Horizons.' })"></h1>
+      <h1 v-html="intl('main.route.root.quick-start.header', { highlight: 'New Horizons.' })"></h1>
       <VDivider />
-      <p>{{ $t('main.route.root.quick-start.text') }}</p>
+      <p>{{ intl('main.route.root.quick-start.text') }}</p>
       <VDivider class="border-opacity-0" />
       <div :class="$style['quickstart-buttons']">
         <VBtn
@@ -20,15 +21,15 @@ import { VDivider, VRow, VCol, VBtn, VCard } from 'vuetify/components';
           variant="outlined"
           elevation="25"
         >
-          {{ $t('main.route.root.quick-start.more') }}
+          {{ intl('main.route.root.quick-start.more') }}
         </VBtn>
         <VBtn to="/create-character" size="large" color="primary" elevation="25">
-          {{ $t('main.route.root.quick-start.start') }}
+          {{ intl('main.route.root.quick-start.start') }}
         </VBtn>
       </div>
     </Container>
-    <Container style="margin-top: 100vh" :title="$t('main.route.root.game-description.header')">
-      <p v-html="$t('main.route.root.game-description.text')"></p>
+    <Container style="margin-top: 100vh" :title="intl('main.route.root.game-description.header')">
+      <p v-html="intl('main.route.root.game-description.text')"></p>
     </Container>
 
     <div :class="$style.cards">
@@ -36,10 +37,10 @@ import { VDivider, VRow, VCol, VBtn, VCard } from 'vuetify/components';
         <VCol>
           <VCard :class="$style.card">
             <template v-slot:title>
-              {{ $t('main.route.root.actions.legacy-editor.title') }}
+              {{ intl('main.route.root.actions.legacy-editor.title') }}
             </template>
             <template v-slot:text>
-              {{ $t('main.route.root.actions.legacy-editor.text') }}
+              {{ intl('main.route.root.actions.legacy-editor.text') }}
             </template>
             <template v-slot:image>
               <ImageSection
@@ -56,10 +57,10 @@ import { VDivider, VRow, VCol, VBtn, VCard } from 'vuetify/components';
         <VCol>
           <VCard :class="$style.card">
             <template v-slot:title>
-              {{ $t('main.route.root.actions.discord.title') }}
+              {{ intl('main.route.root.actions.discord.title') }}
             </template>
             <template v-slot:text>
-              {{ $t('main.route.root.actions.discord.text') }}
+              {{ intl('main.route.root.actions.discord.text') }}
             </template>
             <template v-slot:image>
               <ImageSection
@@ -81,10 +82,10 @@ import { VDivider, VRow, VCol, VBtn, VCard } from 'vuetify/components';
             target="_blank"
           >
             <template v-slot:title>
-              {{ $t('main.route.root.actions.roadmap.title') }}
+              {{ intl('main.route.root.actions.roadmap.title') }}
             </template>
             <template v-slot:text>
-              {{ $t('main.route.root.actions.roadmap.text') }}
+              {{ intl('main.route.root.actions.roadmap.text') }}
             </template>
             <template v-slot:image>
               <ImageSection

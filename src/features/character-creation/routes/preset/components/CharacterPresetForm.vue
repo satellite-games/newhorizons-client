@@ -3,24 +3,22 @@ import ButtonSelect, { type ButtonSelectOption } from '@/components/common/Butto
 import { CharacterCreator } from '@/features/character-creation/services/character-creator';
 import router from '@/router';
 import type { Blueprint, CharacterPreset } from '@newhorizons/core';
-import { sleep } from '@spuxx/browser-utils';
+import { intl, sleep } from '@spuxx/browser-utils';
 import { ref } from 'vue';
-import { useI18n } from 'vue-i18n';
 import type { SubmitEventPromise } from 'vuetify';
 import { VBtn, VForm } from 'vuetify/components';
 import CharacterPresetCustomizationPanel from './CharacterPresetCustomizationPanel.vue';
+import formConfig from './form-config';
 
 const props = defineProps<{
   characterPresets: Blueprint<CharacterPreset>[];
 }>();
 
-const { t } = useI18n();
-
 const characterPresets = props.characterPresets ?? [];
 if (!CharacterCreator.preset) CharacterCreator.setPreset(characterPresets[0]);
 const characterPresetOptions: ButtonSelectOption[] = characterPresets.map((preset) => ({
   value: preset.name,
-  title: t(preset.name),
+  title: intl(preset.name),
 }));
 
 const handlePresetSelect = (value: string) => {
@@ -31,9 +29,6 @@ const handlePresetSelect = (value: string) => {
 };
 
 const form = ref<VForm>();
-const rules = {
-  preset: [(value: string) => (value ? true : t('validation.selection-required'))],
-};
 
 const submitLoading = ref(false);
 const handleSubmit = async (event: SubmitEventPromise) => {
@@ -62,10 +57,9 @@ const handleReset = () => {
     :disabled="CharacterCreator.creationInProgress"
   >
     <ButtonSelect
-      :label="$t('character-creation.route.preset.select')"
+      :label="intl('character-creation.route.preset.select')"
       :options="characterPresetOptions"
-      :selected-value="CharacterCreator.preset.name"
-      :rules="rules.preset"
+      :rules="formConfig.rules.preset"
       color="secondary"
       required
       :disabled="CharacterCreator.creationInProgress"
@@ -83,10 +77,10 @@ const handleReset = () => {
         variant="outlined"
         @click="handleReset"
       >
-        {{ $t('character-creation.route.preset.reset') }}
+        {{ intl('character-creation.route.preset.reset') }}
       </VBtn>
       <VBtn v-else type="submit" size="large" color="primary" :loading="submitLoading">
-        {{ $t('character-creation.route.preset.start') }}
+        {{ intl('character-creation.route.preset.start') }}
       </VBtn>
     </footer>
   </VForm>

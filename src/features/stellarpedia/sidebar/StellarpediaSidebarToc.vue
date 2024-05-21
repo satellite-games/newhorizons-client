@@ -4,14 +4,13 @@ import { Icon } from '@iconify/vue/dist/iconify.js';
 import { ref, toRef, watch } from 'vue';
 import type { StellarpediaBookToc } from '../types';
 import { Stellarpedia } from '../services/stellarpedia';
-import { useI18n } from 'vue-i18n';
+import { Intl } from '@spuxx/browser-utils';
 
 const props = defineProps<{
   bookId: string;
 }>();
 
 const bookId = toRef(props, 'bookId');
-const { locale } = useI18n();
 
 const tableOfContents = ref<StellarpediaBookToc | 'pending' | null>(null);
 const openGroups = ref<string[]>([]);
@@ -49,7 +48,7 @@ updateTableOfContents();
           <template v-slot:prepend>
             <Icon icon="mdi:book" />
           </template>
-          {{ chapter.title[locale] }}
+          {{ chapter.title[Intl.currentLocale] }}
         </VListItem>
       </template>
 
@@ -63,7 +62,7 @@ updateTableOfContents();
           <Icon icon="mdi:file-document" />
         </template>
         <template v-slot:default>
-          {{ article.title[locale] }}
+          {{ article.title[Intl.currentLocale] }}
         </template>
       </VListItem>
     </VListGroup>

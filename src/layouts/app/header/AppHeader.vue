@@ -6,6 +6,7 @@ import AppNavigation from '../navigation/AppNavigation.vue';
 import { Interface } from '@/services/interface';
 import { useDisplay } from 'vuetify';
 import { RouterLink } from 'vue-router';
+import { intl } from '@spuxx/browser-utils';
 
 const { mobile } = useDisplay();
 const { toggleSidebar, sidebarEnabled } = Interface;
@@ -15,7 +16,7 @@ const { toggleSidebar, sidebarEnabled } = Interface;
     <template v-slot:prepend>
       <RouterLink :class="$style.brand" to="/">
         <AppLogo :class="$style.logo" :size="40" />
-        <p :class="$style.title">{{ $t('app.title') }}</p>
+        <p :class="$style.title">{{ intl('app.title') }}</p>
       </RouterLink>
       <VBtn
         v-if="sidebarEnabled"
@@ -32,7 +33,7 @@ const { toggleSidebar, sidebarEnabled } = Interface;
       <AppNavigation />
     </template>
     <template v-slot:append>
-      <VBtn icon variant="text" :title="$t('app.placeholder')">
+      <VBtn icon variant="text" :title="intl('app.placeholder')">
         <Icon icon="mdi:account" />
       </VBtn>
     </template>

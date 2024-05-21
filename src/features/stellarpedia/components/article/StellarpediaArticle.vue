@@ -2,9 +2,9 @@
 import { ref } from 'vue';
 import { Stellarpedia } from '../../services/stellarpedia';
 import Markdown from '@/services/markdown/markdown.service';
-import { useI18n } from 'vue-i18n';
 import { VSkeletonLoader } from 'vuetify/components';
 import { watch } from 'vue';
+import { Intl } from '@spuxx/browser-utils';
 
 const props = defineProps<{
   book: string;
@@ -12,13 +12,11 @@ const props = defineProps<{
   article: string;
 }>();
 
-const { locale } = useI18n();
-
 const content = ref<string | 'pending' | null>(null);
 const load = async () => {
   content.value = 'pending';
   const { book, chapter, article } = props;
-  const text = await Stellarpedia.fetchArticle(book, chapter, article, locale.value);
+  const text = await Stellarpedia.fetchArticle(book, chapter, article, Intl.currentLocale);
   const html = await Markdown.parse(text);
   content.value = html;
 };

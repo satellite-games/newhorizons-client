@@ -3,6 +3,7 @@ import { VDivider, VSheet } from 'vuetify/components';
 import Loader, { type LoaderType } from '../common/Loader.vue';
 import type { ResourceState } from '@/reactivity/resource';
 import type { Ref } from 'vue';
+import { intl } from '@spuxx/browser-utils';
 
 const props = defineProps<{
   title?: string;
@@ -26,7 +27,7 @@ const elevation = props.elevation ?? 10;
   >
     <Loader v-if="state && state.value === 'pending'" :state :type="loaderType" />
     <span v-else-if="state && state.value === 'failed'">
-      {{ $t('error.content-load-failure') }}
+      {{ intl('error.content-load-failure') }}
     </span>
     <section v-else>
       <header v-if="title" :class="$style.header">

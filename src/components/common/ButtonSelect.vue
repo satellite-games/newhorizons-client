@@ -3,6 +3,7 @@ import { VSelect } from 'vuetify/components';
 import FieldButton from './FieldButton.vue';
 import { ref } from 'vue';
 import { watch } from 'vue';
+import { intl } from '@spuxx/browser-utils';
 
 export interface ButtonSelectOption {
   title: string;
@@ -60,7 +61,7 @@ const handleSelect = (value: string) => {
       :disabled
       :value="-1"
       :on-click="selectNextOrPrevious"
-      :title="$t('component.button-select.previous-option')"
+      :title="intl('component.button-select.previous-option')"
       icon="mdi:chevron-left"
     />
     <VSelect
@@ -82,7 +83,7 @@ const handleSelect = (value: string) => {
       direction="right"
       :value="1"
       :on-click="selectNextOrPrevious"
-      :title="$t('component.button-select.next-option')"
+      :title="intl('component.button-select.next-option')"
       icon="mdi:chevron-right"
     />
   </div>

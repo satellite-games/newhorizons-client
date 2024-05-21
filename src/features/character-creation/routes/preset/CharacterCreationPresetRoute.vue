@@ -5,6 +5,7 @@ import { GameDataProvider } from '@/services/game-data-provider';
 import { Resource } from '@/reactivity/resource';
 import CharacterPresetForm from './components/CharacterPresetForm.vue';
 import StellarpediaButton from '@/components/stellarpedia/StellarpediaButton.vue';
+import { intl } from '@spuxx/browser-utils';
 
 const characterPresets = new Resource<Blueprint<CharacterPreset>[]>(async () => {
   return await GameDataProvider.getBlueprints('characterPresets');
@@ -13,7 +14,7 @@ characterPresets.load();
 </script>
 <template>
   <Container
-    :title="$t('character-creation.route.preset.title')"
+    :title="intl('character-creation.route.preset.title')"
     :state="characterPresets.state"
     size="large"
     loaderType="spinner"

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue';
+import { intl } from '@spuxx/browser-utils';
 import { VBtn } from 'vuetify/components';
 
 const handleClick = () => {
@@ -12,7 +13,7 @@ const handleClick = () => {
     type="button"
     variant="plain"
     icon
-    :title="$t('component.stellarpedia-button.title')"
+    :title="intl('component.stellarpedia-button.title')"
     @click="handleClick"
   >
     <Icon icon="mdi:weather-sunny" class="icon" />

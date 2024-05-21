@@ -1,8 +1,6 @@
-import type { Locale } from 'vue-i18n';
-
 export interface StellarpediaBookHeader {
   id: string;
-  title: Record<Locale, string>;
+  title: Record<string, string>;
   icon: string;
   default: {
     chapter: string;
@@ -13,10 +11,10 @@ export interface StellarpediaBookHeader {
 export interface StellarpediaBookToc extends StellarpediaBookHeader {
   chapters?: {
     id: string;
-    title: Record<Locale, string>;
+    title: Record<string, string>;
     articles?: {
       id: string;
-      title: Record<Locale, string>;
+      title: Record<string, string>;
     }[];
   }[];
 }

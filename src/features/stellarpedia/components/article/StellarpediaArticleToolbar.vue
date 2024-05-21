@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { Snacks } from '@/services/snacks/snacks.service';
 import { Icon } from '@iconify/vue/dist/iconify.js';
-import { Logger } from '@spuxx/browser-utils';
-import { useI18n } from 'vue-i18n';
+import { Logger, intl } from '@spuxx/browser-utils';
 import { VBtn } from 'vuetify/components';
 
 const props = defineProps<{
@@ -11,21 +10,19 @@ const props = defineProps<{
   article: string;
 }>();
 
-const { t } = useI18n();
-
 const share = async () => {
   try {
     const url = window.location.href;
     navigator.clipboard.writeText(url);
     Snacks.add({
-      message: t('stellarpedia.route.article.share.success'),
+      message: intl('stellarpedia.route.article.share.success'),
       timeout: 2500,
       type: 'success',
     });
   } catch (error) {
     Logger.error(error as string, 'StellarpediaArticleToolbar');
     Snacks.add({
-      message: t('stellarpedia.route.article.share.error'),
+      message: intl('stellarpedia.route.article.share.error'),
       type: 'error',
     });
   }
