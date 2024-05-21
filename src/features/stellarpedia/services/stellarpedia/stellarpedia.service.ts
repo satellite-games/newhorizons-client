@@ -65,12 +65,21 @@ export class Stellarpedia extends ServiceMixin<Stellarpedia>() {
 
   private static preProcessArticle(article: string, locale: string) {
     let preProcessedArticle = article;
-    preProcessedArticle = preProcessedArticle.replace('books/', `${locale}/stellarpedia/`);
+    console.log(article);
+    // Replace partial image urls will full urls
+    preProcessedArticle = preProcessedArticle.replace(
+      '<img src="/books/',
+      `<img src="${Config.getConfig<AppConfig>().STELLARPEDIA_BASE_URL}/`,
+    );
+    // Replace article urls with correct local urls and remove filename
+    preProcessedArticle = preProcessedArticle.replace('](/books/', `](/stellarpedia/`);
+    preProcessedArticle = preProcessedArticle.replace(`/${locale}.md`, '');
+    // Replace various types of blocks
     preProcessedArticle = preProcessedArticle.replace(
       '> TIP ',
       `> <p class='blockquote-header'>${intl('stellarpedia.block.tip')}</p>`,
     );
-    preProcessedArticle = preProcessedArticle.replace(`/${locale}.md`, '');
+
     return preProcessedArticle;
   }
 }
