@@ -8,5 +8,15 @@ declare global {
   /**
    * A color is a string that represents a color in the Vuetify theme.
    */
-  export type Color = 'accent' | 'primary' | 'secondary' | 'surface';
+  export type Color =
+    | 'accent'
+    | 'accent2'
+    | 'accent3'
+    | 'primary'
+    | 'primary2'
+    | 'primary3'
+    | 'secondary'
+    | 'secondary2'
+    | 'secondary3'
+    | 'surface';
 }

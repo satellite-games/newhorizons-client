@@ -66,7 +66,7 @@ const elevation = props.elevation ?? 10;
 }
 
 .small {
-  width: 400px;
+  width: 500px;
 }
 
 .medium {

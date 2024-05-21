@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { VSelect } from 'vuetify/components';
 import FieldButton from './FieldButton.vue';
-import { computed } from 'vue';
 import { ref } from 'vue';
 import { watch } from 'vue';
 
