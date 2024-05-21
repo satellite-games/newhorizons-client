@@ -61,15 +61,17 @@ watch(props, load, { immediate: true });
     padding: 1.25rem;
     overflow: hidden;
     text-decoration: wavy;
+    font-style: italic;
+    opacity: 0.8;
     background: linear-gradient(
       135deg,
       rgb(var(--v-theme-accent3), 0.5),
       rgb(var(--v-theme-accent), 0.3)
     );
 
-    :global(p) {
-      font-style: italic;
-      opacity: 0.8;
+    :global(.blockquote-header) {
+      margin-bottom: 0.5rem;
+      opacity: 0.5;
     }
   }
 }

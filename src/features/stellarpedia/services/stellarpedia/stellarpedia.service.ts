@@ -1,7 +1,7 @@
 import type { AppConfig } from '@/config/app.config';
 import type { StellarpediaBookHeader, StellarpediaBookToc } from '../../types';
 import jsyaml from 'js-yaml';
-import { Config, ServiceMixin } from '@spuxx/browser-utils';
+import { Config, ServiceMixin, intl } from '@spuxx/browser-utils';
 
 const headers: Record<string, string> = {
   // 'Cache-Control': 'no-cache',
@@ -66,6 +66,10 @@ export class Stellarpedia extends ServiceMixin<Stellarpedia>() {
   private static preProcessArticle(article: string, locale: string) {
     let preProcessedArticle = article;
     preProcessedArticle = preProcessedArticle.replace('books/', `${locale}/stellarpedia/`);
+    preProcessedArticle = preProcessedArticle.replace(
+      '> TIP ',
+      `> <p class='blockquote-header'>${intl('stellarpedia.block.tip')}</p>`,
+    );
     preProcessedArticle = preProcessedArticle.replace(`/${locale}.md`, '');
     return preProcessedArticle;
   }
