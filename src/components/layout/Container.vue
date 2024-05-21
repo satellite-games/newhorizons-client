@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { VDivider, VSheet } from 'vuetify/components';
 import Loader, { type LoaderType } from '../common/Loader.vue';
-import type { Resource, ResourceState } from '@/reactivity/resource';
+import type { ResourceState } from '@/reactivity/resource';
 import type { Ref } from 'vue';
 
 const props = defineProps<{
@@ -30,7 +30,10 @@ const elevation = props.elevation ?? 10;
     </span>
     <section v-else>
       <header v-if="title" :class="$style.header">
-        <h2>{{ title }}</h2>
+        <div :class="$style['header-row']">
+          <h2>{{ title }}</h2>
+          <slot name="header-append"></slot>
+        </div>
         <VDivider />
       </header>
       <slot></slot>
@@ -45,14 +48,21 @@ const elevation = props.elevation ?? 10;
 }
 
 .header {
-  > h2 {
+  h2 {
     margin: 0;
+    margin-right: 0.5rem;
   }
 
-  > hr {
+  hr {
     margin-top: 0.25rem;
     margin-bottom: 1rem;
   }
+}
+
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .small {
