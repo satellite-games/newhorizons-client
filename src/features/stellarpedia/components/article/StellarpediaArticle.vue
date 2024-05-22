@@ -78,6 +78,19 @@ watch(props, load, { immediate: true });
     }
   }
 
+  :global(figure) {
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    :global(figcaption) {
+      margin: 0.5rem auto 0 auto;
+      font-style: italic;
+      opacity: 0.8;
+      text-align: center;
+    }
+  }
+
   :global(img) {
     max-width: 100%;
     margin: auto;

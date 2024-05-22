@@ -65,7 +65,6 @@ export class Stellarpedia extends ServiceMixin<Stellarpedia>() {
 
   private static preProcessArticle(article: string, locale: string) {
     let preProcessedArticle = article;
-    console.log(article);
     // Replace partial image urls will full urls
     preProcessedArticle = preProcessedArticle.replace(
       '<img src="/books/',
@@ -77,7 +76,7 @@ export class Stellarpedia extends ServiceMixin<Stellarpedia>() {
     // Replace various types of blocks
     preProcessedArticle = preProcessedArticle.replace(
       '> TIP ',
-      `> <p class='blockquote-header'>${intl('stellarpedia.block.tip')}</p>`,
+      `> <p class="blockquote-header">${intl('stellarpedia.block.tip')}</p>`,
     );
 
     return preProcessedArticle;
