@@ -8,7 +8,6 @@ import { ref } from 'vue';
 import type { SubmitEventPromise } from 'vuetify';
 import { VBtn, VForm } from 'vuetify/components';
 import CharacterPresetCustomizationPanel from './CharacterPresetCustomizationPanel.vue';
-import formConfig from './form-config';
 import { createSelectValidationRules } from '@/utils/form.utils';
 
 const props = defineProps<{
