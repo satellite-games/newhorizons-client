@@ -3101,13 +3101,6 @@
         "targets": []
       },
       {
-        "id": "skill/physical/imitating-voices",
-        "changesCost": true,
-        "value": "<skill/physical/imitating-voices.factor>",
-        "restrictions": [],
-        "targets": []
-      },
-      {
         "id": "skill/physical/inebriating",
         "changesCost": true,
         "value": "<skill/physical/inebriating.factor>",

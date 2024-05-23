@@ -788,21 +788,6 @@
     "specialExperience": 0
   },
   {
-    "id": "skill/physical/imitating-voices",
-    "skillCategory": "skill-category/physical",
-    "factor": 5,
-    "constraint": 0,
-    "current": 0,
-    "min": 0,
-    "max": 0,
-    "primaryAttributes": ["pri-a/cr", "pri-a/in", "pri-a/ch"],
-    "hasSpecialisations": false,
-    "isBasic": false,
-    "baseValue": 0,
-    "requirements": [],
-    "specialExperience": 0
-  },
-  {
     "id": "skill/physical/inebriating",
     "skillCategory": "skill-category/physical",
     "factor": 5,
