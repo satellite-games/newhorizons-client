@@ -48,6 +48,7 @@ main:
 
 character-creation:
   title: Charakter erstellen
+  default-character-name: Neuer Charakter
   route:
     preset:
       title: Voreinstellungen

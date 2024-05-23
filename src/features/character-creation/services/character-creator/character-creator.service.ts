@@ -1,4 +1,4 @@
-import { ServiceMixin, debug } from '@spuxx/browser-utils';
+import { ServiceMixin, debug, intl } from '@spuxx/browser-utils';
 import { ref } from 'vue';
 import { CharacterCreationProgress } from './types';
 import { Character, CharacterPreset, createNewCharacter, type Blueprint } from '@newhorizons/core';
@@ -16,6 +16,7 @@ export class CharacterCreator extends ServiceMixin<CharacterCreator>() {
    */
   static start() {
     const character = createNewCharacter();
+    character.general.name = intl('character-creation.default-character-name');
     this.instance._character.value = character;
     this.setProgress(CharacterCreationProgress.presetSelected);
     debug(`Character creation started for character ${character.id}.`, this.name);
