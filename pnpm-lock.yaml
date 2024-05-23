@@ -11,6 +11,9 @@ importers:
       '@newhorizons/core':
         specifier: link:../newhorizons-core
         version: link:../newhorizons-core
+      '@newhorizons/wiki':
+        specifier: link:../newhorizons-wiki
+        version: link:../newhorizons-wiki
       '@spuxx/browser-utils':
         specifier: 0.1.0-rc.3
         version: 0.1.0-rc.3(@modyfi/vite-plugin-yaml@1.1.0(rollup@4.14.2)(vite@5.2.8(@types/node@20.12.7)))

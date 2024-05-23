@@ -4,9 +4,9 @@ import { VSelect, VListItem } from 'vuetify/components';
 import { useRoute } from 'vue-router';
 import { Icon } from '@iconify/vue/dist/iconify.js';
 import SidebarTeleport from '@/components/sidebar/SidebarTeleport.vue';
-import { Stellarpedia } from '../services/stellarpedia';
 import StellarpediaSidebarToc from './StellarpediaSidebarToc.vue';
 import { Intl, intl } from '@spuxx/browser-utils';
+import { WikiService } from '@newhorizons/wiki';
 
 const { params } = useRoute();
 const { book } = params as { book: string };
@@ -15,7 +15,7 @@ const selectedBookId = ref<string>(book);
 const books = ref<{ id: string; title: string; icon: string }[]>([]);
 
 const getBooks = async () => {
-  books.value = (await Stellarpedia.fetchBooks()).map((b) => {
+  books.value = (await WikiService.fetchBooks()).map((b) => {
     return {
       id: b.id,
       title: b.title[Intl.currentLocale as unknown as keyof typeof b.title],

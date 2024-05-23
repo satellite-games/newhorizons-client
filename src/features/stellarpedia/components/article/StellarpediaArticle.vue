@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { Stellarpedia } from '../../services/stellarpedia';
-import Markdown from '@/services/markdown/markdown.service';
 import { VSkeletonLoader } from 'vuetify/components';
 import { watch } from 'vue';
-import { Intl } from '@spuxx/browser-utils';
+import { WikiService } from '@newhorizons/wiki';
+import { postProcessArticle } from './article.utils';
 
 const props = defineProps<{
   book: string;
@@ -16,9 +15,8 @@ const content = ref<string | 'pending' | null>(null);
 const load = async () => {
   content.value = 'pending';
   const { book, chapter, article } = props;
-  const text = await Stellarpedia.fetchArticle(book, chapter, article, Intl.currentLocale);
-  const html = await Markdown.parse(text);
-  content.value = html;
+  const html = await WikiService.fetchArticle(book, chapter, article);
+  content.value = postProcessArticle(html);
 };
 
 watch(props, load, { immediate: true });

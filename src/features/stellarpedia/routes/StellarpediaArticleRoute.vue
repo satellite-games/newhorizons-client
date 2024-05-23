@@ -5,13 +5,14 @@ import Container from '@/components/layout/Container.vue';
 import StellarpediaArticle from '../components/article/StellarpediaArticle.vue';
 import StellarpediaArticleToolbar from '../components/article/StellarpediaArticleToolbar.vue';
 import PageContent from '@/components/app/PageContent.vue';
+import { intl } from '@spuxx/browser-utils';
 
 const params = useRouteParamsAsStrings() as { book: string; chapter: string; article: string };
 </script>
 
 <template>
   <StellarpediaSidebar />
-  <PageContent>
+  <PageContent :title="intl('stellarpedia.title')">
     <Container size="max">
       <StellarpediaArticleToolbar
         :book="params.book"

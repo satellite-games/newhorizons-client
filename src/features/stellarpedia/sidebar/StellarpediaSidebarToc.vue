@@ -2,9 +2,8 @@
 import { VList, VListGroup, VListItem, VSkeletonLoader } from 'vuetify/components';
 import { Icon } from '@iconify/vue/dist/iconify.js';
 import { ref, toRef, watch } from 'vue';
-import type { StellarpediaBookToc } from '../types';
-import { Stellarpedia } from '../services/stellarpedia';
 import { Intl } from '@spuxx/browser-utils';
+import { WikiService, type WikiBookToc } from '@newhorizons/wiki';
 
 const props = defineProps<{
   bookId: string;
@@ -12,7 +11,7 @@ const props = defineProps<{
 
 const bookId = toRef(props, 'bookId');
 
-const tableOfContents = ref<StellarpediaBookToc | 'pending' | null>(null);
+const tableOfContents = ref<WikiBookToc | 'pending' | null>(null);
 const openGroups = ref<string[]>([]);
 
 watch(bookId, () => {
@@ -22,7 +21,7 @@ watch(bookId, () => {
 const updateTableOfContents = async () => {
   tableOfContents.value = 'pending';
   try {
-    tableOfContents.value = await Stellarpedia.fetchToc(bookId.value);
+    tableOfContents.value = await WikiService.fetchToc(bookId.value);
   } catch (error) {
     tableOfContents.value = null;
   }
