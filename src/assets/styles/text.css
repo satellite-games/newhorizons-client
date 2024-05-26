@@ -23,11 +23,10 @@ h6 {
   margin-bottom: 1rem;
 }
 
-p a,
-p a:visited {
-  color: var(--color-primary);
+main a,
+main a:visited {
+  color: rgb(var(--v-theme-primary));
 }
-
-p a:not(:hover) {
+main a:not(:hover) {
   text-decoration: none;
 }

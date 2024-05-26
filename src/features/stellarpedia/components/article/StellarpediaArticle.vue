@@ -2,8 +2,9 @@
 import { ref } from 'vue';
 import { VSkeletonLoader } from 'vuetify/components';
 import { watch } from 'vue';
-import { WikiService } from '@newhorizons/wiki';
+import { Wiki } from '@newhorizons/wiki';
 import { postProcessArticle } from './article.utils';
+import RuntimeComponent from '@/components/common/RuntimeComponent.vue';
 
 const props = defineProps<{
   book: string;
@@ -15,7 +16,7 @@ const content = ref<string | 'pending' | null>(null);
 const load = async () => {
   content.value = 'pending';
   const { book, chapter, article } = props;
-  const html = await WikiService.fetchArticle(book, chapter, article);
+  const html = await Wiki.fetchArticle(book, chapter, article);
   content.value = postProcessArticle(html);
 };
 
@@ -25,27 +26,29 @@ watch(props, load, { immediate: true });
   <span v-if="content === 'pending'">
     <VSkeletonLoader type="article" />
   </span>
-  <article v-else-if="content" v-html="content" class="article"></article>
+  <article v-else-if="content" class="wiki-article">
+    <RuntimeComponent :template="content" />
+  </article>
 </template>
 
-<style scoped>
-.article {
+<style>
+.wiki-article {
   display: flex;
   flex-direction: column;
 
-  :global(> *:first-child) {
+  > *:first-child {
     margin-top: 0;
   }
 
-  :global(> *:not(:first-child)) {
+  > *:not(:first-child) {
     margin-top: 1em;
   }
 
-  :global(> h1) {
+  > h1 {
     border-bottom: 1px solid rgb(var(--v-border-color), var(--v-border-opacity));
   }
 
-  :global(ul) {
+  ul {
     padding-left: 2rem;
 
     :global(li:not(:first-child)) {
@@ -53,11 +56,7 @@ watch(props, load, { immediate: true });
     }
   }
 
-  :global(a) {
-    color: rgb(var(--v-theme-primary));
-  }
-
-  :global(blockquote) {
+  blockquote {
     border-radius: var(--v-border-radius);
     padding: 1.25rem;
     overflow: hidden;
@@ -70,18 +69,18 @@ watch(props, load, { immediate: true });
       rgb(var(--v-theme-accent), 0.3)
     );
 
-    :global(.blockquote-header) {
+    .blockquote-header {
       margin-bottom: 0.5rem;
       opacity: 0.5;
     }
   }
 
-  :global(figure) {
+  figure {
     max-width: 100%;
     display: flex;
     flex-direction: column;
 
-    :global(figcaption) {
+    figcaption {
       margin: 0.5rem auto 0 auto;
       font-style: italic;
       opacity: 0.8;
@@ -89,10 +88,20 @@ watch(props, load, { immediate: true });
     }
   }
 
-  :global(img) {
+  img {
     max-width: 100%;
     margin: auto;
     border-radius: var(--v-border-radius);
+  }
+
+  table {
+    td {
+      padding: 0.5rem;
+      vertical-align: top;
+    }
+    td:has(strong) {
+      white-space: nowrap;
+    }
   }
 }
 </style>

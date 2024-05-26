@@ -3,7 +3,7 @@ import { VList, VListGroup, VListItem, VSkeletonLoader } from 'vuetify/component
 import { Icon } from '@iconify/vue/dist/iconify.js';
 import { ref, toRef, watch } from 'vue';
 import { Intl } from '@spuxx/browser-utils';
-import { WikiService, type WikiBookToc } from '@newhorizons/wiki';
+import { Wiki, type WikiBookToc } from '@newhorizons/wiki';
 
 const props = defineProps<{
   bookId: string;
@@ -21,7 +21,7 @@ watch(bookId, () => {
 const updateTableOfContents = async () => {
   tableOfContents.value = 'pending';
   try {
-    tableOfContents.value = await WikiService.fetchToc(bookId.value);
+    tableOfContents.value = await Wiki.fetchToc(bookId.value);
   } catch (error) {
     tableOfContents.value = null;
   }

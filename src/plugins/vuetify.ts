@@ -18,7 +18,7 @@ export const vuetify = createVuetify({
           accent: colors.purple.accent2,
           accent2: colors.purple.accent4,
           accent3: colors.deepPurple.darken4,
-          primary: colors.cyan.accent2,
+          primary: colors.cyan.accent3,
           primary2: colors.cyan.darken2,
           primary3: colors.cyan.darken4,
           secondary: '#101010',

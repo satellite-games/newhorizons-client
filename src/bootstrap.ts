@@ -3,6 +3,7 @@ import { appConfig, type AppConfig } from './config/app.config';
 import deApplication from '@/assets/locales/de.yaml';
 import { de as deBlueprints } from '@newhorizons/core/locales';
 import { de as deWiki } from '@newhorizons/wiki/locales';
+import { Wiki } from '@newhorizons/wiki';
 
 Config.setup<AppConfig>({ defaultConfig: appConfig });
 Logger.setLevel(Config.getConfig<AppConfig>().LOG_LEVEL);
@@ -16,4 +17,12 @@ Intl.setup({
       values: de,
     },
   ],
+});
+
+Wiki.setConfig({
+  LOCALE: Intl.currentLocale,
+  EMBED: {
+    BASE_PATH: '/stellarpedia',
+    REMOVE_FILENAMES: true,
+  },
 });

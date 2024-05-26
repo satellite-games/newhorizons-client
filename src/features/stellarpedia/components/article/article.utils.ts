@@ -9,9 +9,22 @@ export const postProcessArticle = (text: string) => {
   let preProcessedText = text;
   // Replace partial image urls will full urls
   preProcessedText = preProcessedText.replace('<img ', `<img class="v-card--variant-elevated "`);
-  // Replace article urls with correct local urls and remove filename
-  // preProcessedText = preProcessedText.replace('<a href="/books/', `<a href="/stellarpedia/`);
-  // preProcessedText = preProcessedText.replace(`/${Intl.currentLocale}.md`, '');
+  // Replace <a> tags with <router-link> tags
+  const linkPattern = /(<a).*?(href=)["|'][^"]+["|'].*?[^<]+(<\/a>)/g;
+  const linkMatches = preProcessedText.matchAll(linkPattern);
+  for (const match of linkMatches) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const [_, startTag, href, endTag] = match;
+    if (!startTag || !href || !endTag) continue;
+    preProcessedText = preProcessedText.replace(startTag, '<router-link');
+    preProcessedText = preProcessedText.replace(href, 'to=');
+    preProcessedText = preProcessedText.replace(endTag, '</router-link>');
+  }
+
+  preProcessedText = preProcessedText.replace(
+    /<a.*?href=["|']([^"]+)["|'].*?([^<]+)<\/a>/g,
+    '<router-link :to="$1"$2</router-link>',
+  );
   // Replace various types of blocks
   preProcessedText = preProcessedText.replace(
     '> TIP ',
