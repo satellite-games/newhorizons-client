@@ -8,7 +8,7 @@ misc:
   yes: Ja
   no: Nein
   loading: Lade...
-  next: Weiter
+  forward: Weiter
   back: Zurück
   cancel: Abbrechen
   close: Schließen

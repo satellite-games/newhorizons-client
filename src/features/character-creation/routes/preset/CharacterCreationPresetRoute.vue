@@ -6,6 +6,8 @@ import { Resource } from '@/reactivity/resource';
 import CharacterPresetForm from './components/CharacterPresetForm.vue';
 import StellarpediaButton from '@/components/stellarpedia/StellarpediaButton.vue';
 import { intl } from '@spuxx/browser-utils';
+import SimpleNavButton from '@/components/common/SimpleNavButton.vue';
+import { CharacterCreator } from '../../services/character-creator';
 
 const characterPresets = new Resource<Blueprint<CharacterPreset>[]>(async () => {
   return await GameDataProvider.getBlueprints('characterPresets');
@@ -21,6 +23,11 @@ characterPresets.load();
   >
     <template v-slot:actions>
       <StellarpediaButton />
+      <SimpleNavButton
+        type="forward"
+        to="/create-character/origin"
+        :disabled="!CharacterCreator.creationInProgress"
+      />
     </template>
     <CharacterPresetForm v-if="characterPresets.data" :characterPresets="characterPresets.data" />
   </Container>

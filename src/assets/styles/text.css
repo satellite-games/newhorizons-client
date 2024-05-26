@@ -23,8 +23,8 @@ h6 {
   margin-bottom: 1rem;
 }
 
-main a,
-main a:visited {
+main a:not(.v-btn),
+main a:visited:not(.v-btn) {
   color: rgb(var(--v-theme-primary));
 }
 main a:not(:hover) {
