@@ -33,7 +33,9 @@ const elevation = props.elevation ?? 10;
       <header v-if="title" :class="$style.header">
         <div :class="$style['header-row']">
           <h2>{{ title }}</h2>
-          <slot name="header-append"></slot>
+          <div :class="$style.actions">
+            <slot name="actions"></slot>
+          </div>
         </div>
         <VDivider />
       </header>

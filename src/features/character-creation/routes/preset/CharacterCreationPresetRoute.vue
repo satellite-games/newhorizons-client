@@ -19,7 +19,7 @@ characterPresets.load();
     size="large"
     loaderType="spinner"
   >
-    <template v-slot:header-append>
+    <template v-slot:actions>
       <StellarpediaButton />
     </template>
     <CharacterPresetForm v-if="characterPresets.data" :characterPresets="characterPresets.data" />
