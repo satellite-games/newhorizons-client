@@ -4,9 +4,11 @@ import deApplication from '@/assets/locales/de.yaml';
 import { de as deBlueprints } from '@newhorizons/core/locales';
 import { de as deWiki } from '@newhorizons/wiki/locales';
 import { Wiki } from '@newhorizons/wiki';
+import { Development } from './services/development';
 
 Config.setup<AppConfig>({ defaultConfig: appConfig });
 Logger.setLevel(Config.getConfig<AppConfig>().LOG_LEVEL);
+Development.setup(Config.getConfig<AppConfig>().DEV_OPTIONS);
 
 const de = { ...deApplication, ...deBlueprints, ...deWiki };
 Intl.setup({

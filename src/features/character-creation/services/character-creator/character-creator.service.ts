@@ -15,6 +15,7 @@ export class CharacterCreator extends ServiceMixin<CharacterCreator>() {
    * Starts the character creation process.
    */
   static start() {
+    if (!this.preset) throw new Error('Must select a preset before starting character creation.');
     const character = createNewCharacter();
     character.general.name = intl('character-creation.default-character-name');
     this.instance._character.value = character;
