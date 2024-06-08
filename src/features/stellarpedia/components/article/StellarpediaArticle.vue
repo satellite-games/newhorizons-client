@@ -95,12 +95,16 @@ watch(props, load, { immediate: true });
   }
 
   table {
-    td {
+    td,
+    th {
       padding: 0.5rem;
       vertical-align: top;
     }
-    td:has(strong) {
-      white-space: nowrap;
+
+    tbody {
+      th {
+        text-align: start;
+      }
     }
   }
 }
