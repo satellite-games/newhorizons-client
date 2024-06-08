@@ -1,7 +1,7 @@
 import { ServiceMixin, debug, intl } from '@spuxx/browser-utils';
 import { ref } from 'vue';
 import { CharacterCreationProgress } from './types';
-import { Character, CharacterPreset, createNewCharacter, type Blueprint } from '@newhorizons/core';
+import { Character, CharacterPreset, type Blueprint } from '@newhorizons/core';
 
 /**
  * `CharacterCreator` is responsible for managing the character creation process.
@@ -16,7 +16,7 @@ export class CharacterCreator extends ServiceMixin<CharacterCreator>() {
    */
   static start() {
     if (!this.preset) throw new Error('Must select a preset before starting character creation.');
-    const character = createNewCharacter();
+    const character = Character.initialize();
     character.general.name = intl('character-creation.default-character-name');
     this.instance._character.value = character;
     this.setProgress(CharacterCreationProgress.presetSelected);
