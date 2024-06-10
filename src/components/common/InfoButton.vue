@@ -13,10 +13,10 @@ const handleClick = () => {
     type="button"
     variant="plain"
     icon
-    :title="intl('component.stellarpedia-button.title')"
+    :title="intl('component.info-button.title')"
     @click="handleClick"
   >
-    <Icon icon="mdi:weather-sunny" class="icon" />
+    <Icon icon="mdi:information-circle-outline" class="icon" />
   </VBtn>
 </template>
 

@@ -1,24 +1,28 @@
 import { ServiceMixin, debug, intl } from '@spuxx/browser-utils';
 import { ref } from 'vue';
 import { CharacterCreationProgress } from './types';
-import { Character, CharacterPreset, type Blueprint } from '@newhorizons/core';
+import {
+  Character,
+  CharacterCreationContext,
+  CharacterPreset,
+  type Blueprint,
+} from '@newhorizons/core';
 
 /**
  * `CharacterCreator` is responsible for managing the character creation process.
  */
 export class CharacterCreator extends ServiceMixin<CharacterCreator>() {
   private _progress = ref<CharacterCreationProgress>(CharacterCreationProgress.initial);
-  private _preset = ref<Blueprint<CharacterPreset> | null>(null);
-  private _character = ref<Character | null>(null);
+  private _context = ref<CharacterCreationContext | null>(null);
 
   /**
    * Starts the character creation process.
    */
-  static start() {
-    if (!this.preset) throw new Error('Must select a preset before starting character creation.');
-    const character = Character.initialize();
+  static start(preset: Blueprint<CharacterPreset>) {
+    const context = new CharacterCreationContext(new CharacterPreset(preset));
+    this.instance._context.value = context;
+    const { character } = context;
     character.general.name = intl('character-creation.default-character-name');
-    this.instance._character.value = character;
     this.setProgress(CharacterCreationProgress.presetSelected);
     debug(`Character creation started for character ${character.id}.`, this.name);
   }
@@ -27,19 +31,23 @@ export class CharacterCreator extends ServiceMixin<CharacterCreator>() {
     return this.instance._progress.value;
   }
 
-  static get preset() {
-    return this.instance._preset.value;
+  static get context(): CharacterCreationContext | null {
+    return this.instance._context.value;
   }
 
-  static get character() {
-    return this.instance._character.value;
+  static get preset(): CharacterPreset | undefined {
+    return this.context?.preset;
+  }
+
+  static get character(): Character | undefined {
+    return this.context?.character;
   }
 
   /**
    * Indicates whether the character creation process is currently in progress.
    */
   static get creationInProgress() {
-    return this.character !== null;
+    return this.progress !== CharacterCreationProgress.initial;
   }
 
   /**
@@ -47,21 +55,11 @@ export class CharacterCreator extends ServiceMixin<CharacterCreator>() {
    */
   static async reset() {
     this.instance._progress.value = CharacterCreationProgress.initial;
-    this.instance._preset.value = null;
-    this.instance._character.value = null;
+    this.instance._context.value = null;
     debug('Character creation reset.', this.name);
   }
 
   static setProgress(progress: CharacterCreationProgress) {
     this.instance._progress.value = progress;
-  }
-
-  /**
-   * Sets the preset for the character creation process.
-   * @param preset The preset to set.
-   */
-  static setPreset(preset: Blueprint<CharacterPreset>) {
-    this.instance._preset.value = { ...preset };
-    debug(`Character preset set to '${preset.name}'.`, this.name);
   }
 }

@@ -86,6 +86,12 @@ character-creation:
       reset: Charaktererstellung zurücksetzen
     origin:
       title: Herkunft
+      first-language:
+        label: Muttersprache
+        hint: Die Muttersprache ist die Sprache, die Dein Charakter in seiner frühen Kindheit erlernt hat. Die am weitesten im Sonnensystem verbreitete Sprache ist Solaire, eine Mischung aus einer Reihe vor allem westlicher Sprachen.
+        value: Solaire
+      select-skill-bonus: Fähigkeitsbonus wählen
+      submit: Herkunft wählen
     general:
       title: Persönliches
     attributes:
@@ -99,7 +105,7 @@ character-creation:
     inventory:
       title: Ausrüstung & Besitz
     finish:
-      title: Abschluss
+      title: Fertigstellen
 
 stellarpedia:
   title: Stellarpedia
@@ -128,5 +134,5 @@ component:
   button-select:
     previous-option: Vorherige Option
     next-option: Nächste Option
-  stellarpedia-button:
+  info-button:
     title: Mehr Informationen

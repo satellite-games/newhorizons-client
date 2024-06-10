@@ -4,13 +4,15 @@ import Container from '@/components/layout/Container.vue';
 import { GameDataProvider } from '@/services/game-data-provider';
 import { Resource } from '@/reactivity/resource';
 import CharacterPresetForm from './components/CharacterPresetForm.vue';
-import StellarpediaButton from '@/components/stellarpedia/StellarpediaButton.vue';
+import InfoButton from '@/components/common/InfoButton.vue';
 import { intl } from '@spuxx/browser-utils';
 import SimpleNavButton from '@/components/common/SimpleNavButton.vue';
 import { CharacterCreator } from '../../services/character-creator';
 
 const characterPresets = new Resource<Blueprint<CharacterPreset>[]>(async () => {
-  return await GameDataProvider.getBlueprints('characterPresets');
+  const characterPresets = await GameDataProvider.getBlueprints('characterPresets');
+  if (!CharacterCreator.context) = new
+  return characterPresets;
 }, 'characterPresets');
 characterPresets.load();
 </script>
@@ -22,7 +24,7 @@ characterPresets.load();
     loaderType="spinner"
   >
     <template v-slot:actions>
-      <StellarpediaButton />
+      <InfoButton />
       <SimpleNavButton
         type="forward"
         to="/create-character/origin"

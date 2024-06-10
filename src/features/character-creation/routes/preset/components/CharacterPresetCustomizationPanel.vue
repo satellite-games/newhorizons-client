@@ -11,6 +11,9 @@ import {
 import config from './form-config';
 import { intl } from '@spuxx/browser-utils';
 import { createInputValidationRules } from '@/utils/form.utils';
+import { computed } from 'vue';
+
+const characterPreset = computed(() => CharacterCreator.preset);
 
 const { variant, fields } = config;
 
@@ -30,7 +33,7 @@ const createRules = (min: number, max: number) => {
 };
 </script>
 <template>
-  <VExpansionPanels v-if="CharacterCreator.preset" class="panels">
+  <VExpansionPanels v-if="characterPreset" class="panels">
     <VExpansionPanel
       :title="intl('character-creation.route.preset.customize')"
       bg-color="secondary2"
@@ -42,7 +45,7 @@ const createRules = (min: number, max: number) => {
               <VTextField
                 type="number"
                 :variant
-                v-model="CharacterCreator.preset.attributePoints"
+                v-model="characterPreset.attributePoints"
                 @update:model-value="handleUpdate"
                 :label="intl('character-creation.route.preset.attribute-points.label')"
                 :hint="intl('character-creation.route.preset.attribute-points.hint')"
@@ -55,7 +58,7 @@ const createRules = (min: number, max: number) => {
               <VTextField
                 type="number"
                 :variant
-                v-model="CharacterCreator.preset.traitPoints"
+                v-model="characterPreset.traitPoints"
                 @update:model-value="handleUpdate"
                 :label="intl('character-creation.route.preset.trait-points.label')"
                 :hint="intl('character-creation.route.preset.trait-points.hint')"
@@ -68,7 +71,7 @@ const createRules = (min: number, max: number) => {
               <VTextField
                 type="number"
                 :variant
-                v-model="CharacterCreator.preset.interestPoints"
+                v-model="characterPreset.interestPoints"
                 @update:model-value="handleUpdate"
                 :label="intl('character-creation.route.preset.interest-points.label')"
                 :hint="intl('character-creation.route.preset.interest-points.hint')"

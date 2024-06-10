@@ -2,7 +2,7 @@
 import ButtonSelect, { type ButtonSelectOption } from '@/components/common/ButtonSelect.vue';
 import { CharacterCreator } from '@/features/character-creation/services/character-creator';
 import router from '@/router';
-import type { Blueprint, CharacterPreset } from '@newhorizons/core';
+import { CharacterPreset, type Blueprint } from '@newhorizons/core';
 import { intl, sleep } from '@spuxx/browser-utils';
 import { ref } from 'vue';
 import type { SubmitEventPromise } from 'vuetify';
@@ -15,16 +15,19 @@ const props = defineProps<{
 }>();
 
 const characterPresets = props.characterPresets ?? [];
-if (!CharacterCreator.preset) CharacterCreator.setPreset(characterPresets[0]);
+const selectedPreset = ref<Blueprint<CharacterPreset>>(
+  CharacterCreator.preset ?? characterPresets[0],
+);
+// if (!CharacterCreator.preset) CharacterCreator.setPreset(characterPresets[0]);
 const characterPresetOptions: ButtonSelectOption[] = characterPresets.map((preset) => ({
   value: preset.name,
   title: intl(preset.name),
 }));
 
 const handlePresetSelect = (value: string) => {
-  const selectedPreset = characterPresets.find((preset) => preset.name === value);
-  if (selectedPreset) {
-    CharacterCreator.setPreset(selectedPreset);
+  const characterPreset = characterPresets.find((preset) => preset.name === value);
+  if (characterPreset) {
+    selectedPreset.value = characterPreset;
   }
 };
 
@@ -37,7 +40,7 @@ const handleSubmit = async (event: SubmitEventPromise) => {
     // We include a short delay here to indicate that the creation process is starting
     submitLoading.value = true;
     await sleep(1000);
-    CharacterCreator.start();
+    CharacterCreator.start(selectedPreset.value);
     submitLoading.value = false;
     router.push({ name: 'character-creation/origin' });
   }
@@ -45,20 +48,20 @@ const handleSubmit = async (event: SubmitEventPromise) => {
 
 const handleReset = () => {
   CharacterCreator.reset();
-  CharacterCreator.setPreset({ ...characterPresets[0] });
+  // CharacterCreator.start({ ...characterPresets[0] });
 };
 </script>
 
 <template>
   <VForm
     ref="form"
-    v-if="Array.isArray(characterPresets) && CharacterCreator.preset"
+    v-if="Array.isArray(characterPresets) && selectedPreset"
     @submit.prevent="handleSubmit"
     :disabled="CharacterCreator.creationInProgress"
   >
     <ButtonSelect
       :label="intl('character-creation.route.preset.select')"
-      :selected-value="CharacterCreator.preset.name"
+      :selected-value="selectedPreset.name"
       :options="characterPresetOptions"
       :rules="
         createSelectValidationRules({

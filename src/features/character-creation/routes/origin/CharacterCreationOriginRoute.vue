@@ -2,19 +2,22 @@
 import Container from '@/components/layout/Container.vue';
 import { Resource } from '@/reactivity/resource';
 import { GameDataProvider } from '@/services/game-data-provider';
-import { CharacterOrigin, getWikiPath, type Blueprint } from '@newhorizons/core';
+import { CharacterOrigin, type Blueprint } from '@newhorizons/core';
 import { intl } from '@spuxx/browser-utils';
-import { VForm } from 'vuetify/components';
+import { VBtn, VForm } from 'vuetify/components';
 import { CharacterCreationProgress, CharacterCreator } from '../../services/character-creator';
 import ButtonSelect, { type ButtonSelectOption } from '@/components/common/ButtonSelect.vue';
 import { ref } from 'vue';
 import { computed } from 'vue';
 import { createSelectValidationRules } from '@/utils/form.utils';
 import StellarpediaArticle from '@/features/stellarpedia/components/article/StellarpediaArticle.vue';
+import OriginOptionsForm from './components/OriginOptionsForm.vue';
+import SimpleNavButton from '@/components/common/SimpleNavButton.vue';
+import { Wiki } from '@newhorizons/wiki';
 
 const characterOrigins = new Resource<Blueprint<CharacterOrigin>[]>(async () => {
   const origins = await GameDataProvider.getBlueprints<CharacterOrigin>('characterOrigins');
-  if (!selectedOrigin.value) selectedOrigin.value = origins[0].name;
+  if (!selectedOriginName.value) selectedOriginName.value = origins[0].name;
   return origins;
 }, 'characterPresets');
 characterOrigins.load();
@@ -30,10 +33,20 @@ const characterOriginOptions = computed(() => {
   );
 });
 
-const selectedOrigin = ref<string | null>(CharacterCreator.character?.general.originName ?? null);
+const selectedOriginName = ref<string | null>(
+  CharacterCreator.character?.general.originName ?? null,
+);
+const selectedOrigin = computed(
+  () => characterOrigins.data?.find((origin) => origin.name === selectedOriginName.value) ?? null,
+);
+
+const selectedOptions = ref<{
+  firstLanguage: string;
+  selectedSkillBonuses: Record<string, number>;
+}>();
 
 const handleSelect = (value: string) => {
-  selectedOrigin.value = value;
+  selectedOriginName.value = value;
 };
 
 const disabled = computed(() => {
@@ -50,10 +63,24 @@ const handleSubmit = () => {};
     :state="characterOrigins.state"
     loaderType="spinner"
   >
-    <VForm ref="form" v-if="selectedOrigin" @submit.prevent="handleSubmit" class="form" :disabled>
+    <template v-slot:actions>
+      <SimpleNavButton type="back" to="/create-character/preset" />
+      <SimpleNavButton
+        type="forward"
+        to="/create-character/general"
+        :disabled="CharacterCreator.progress < CharacterCreationProgress.originSelected"
+      />
+    </template>
+    <VForm
+      ref="form"
+      v-if="selectedOriginName"
+      @submit.prevent="handleSubmit"
+      class="form"
+      :disabled
+    >
       <ButtonSelect
         :label="intl('character-creation.route.preset.select')"
-        :selected-value="selectedOrigin"
+        :selected-value="selectedOriginName"
         :options="characterOriginOptions"
         :rules="
           createSelectValidationRules({
@@ -66,8 +93,30 @@ const handleSubmit = () => {};
         :on-select="handleSelect"
       />
 
-      <StellarpediaArticle v-if="selectedOrigin" v-bind="getWikiPath(selectedOrigin)" />
+      <StellarpediaArticle
+        v-if="selectedOriginName"
+        v-bind="Wiki.getArticlePath(selectedOriginName)"
+      />
+      <OriginOptionsForm v-if="selectedOrigin" :origin="selectedOrigin" :disabled />
+      <VBtn
+        :disabled="CharacterCreator.progress !== CharacterCreationProgress.presetSelected"
+        type="submit"
+        size="large"
+        color="primary"
+      >
+        {{ intl('character-creation.route.origin.submit') }}
+      </VBtn>
     </VForm>
   </Container>
 </template>
-<style scoped></style>
+
+<style scoped>
+.form {
+  display: grid;
+}
+
+.form .v-btn[type='submit'] {
+  margin-top: 1rem;
+  justify-self: center;
+}
+</style>
