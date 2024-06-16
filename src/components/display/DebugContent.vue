@@ -13,13 +13,14 @@ const display = Config.getConfig<AppConfig>().LOG_LEVEL === 'debug';
       <Icon class="icon" icon="mdi:code"></Icon>
       Debug
     </p>
-    <slot></slot>
+    <pre><slot></slot></pre>
   </VCard>
 </template>
 
 <style scoped>
 .debug-content {
   min-width: 10rem;
+  max-width: 100%;
   padding: 0.5rem;
   margin: 1rem;
   border-radius: var(--v-border-radius);

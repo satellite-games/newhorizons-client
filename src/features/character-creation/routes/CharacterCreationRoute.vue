@@ -1,9 +1,14 @@
 <script setup lang="ts">
 import PageContent from '@/components/app/PageContent.vue';
-import DebugContent from '@/components/common/DebugContent.vue';
+import DebugContent from '@/components/display/DebugContent.vue';
 import CharacterCreationSidebar from '@/features/character-creation/sidebar/CharacterCreationSidebar.vue';
 import { CharacterCreator } from '../services/character-creator';
 import { intl } from '@spuxx/browser-utils';
+import { computed } from 'vue';
+
+const stringifiedPreset = computed(
+  () => JSON.stringify(CharacterCreator.preset, null, 2) ?? 'No preset selected',
+);
 </script>
 
 <template>
@@ -12,6 +17,8 @@ import { intl } from '@spuxx/browser-utils';
     :title="CharacterCreator.character?.general.name ?? intl('character-creation.title')"
   >
     <router-view />
-    <DebugContent> Progress: {{ CharacterCreator.progress }}<br /> </DebugContent>
+    <DebugContent>
+      {{ stringifiedPreset }}
+    </DebugContent>
   </PageContent>
 </template>
