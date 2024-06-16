@@ -10,8 +10,11 @@ import SimpleNavButton from '@/components/common/SimpleNavButton.vue';
 import { CharacterCreator } from '../../services/character-creator';
 
 const characterPresets = new Resource<Blueprint<CharacterPreset>[]>(async () => {
-  const characterPresets = await GameDataProvider.getBlueprints('characterPresets');
-  if (!CharacterCreator.context) = new
+  const characterPresets =
+    await GameDataProvider.getBlueprints<CharacterPreset>('characterPresets');
+  if (!CharacterCreator.preset) {
+    CharacterCreator.selectPreset(characterPresets[0]);
+  }
   return characterPresets;
 }, 'characterPresets');
 characterPresets.load();
@@ -28,7 +31,7 @@ characterPresets.load();
       <SimpleNavButton
         type="forward"
         to="/create-character/origin"
-        :disabled="!CharacterCreator.creationInProgress"
+        :disabled="!CharacterCreator.presetLocked"
       />
     </template>
     <CharacterPresetForm v-if="characterPresets.data" :characterPresets="characterPresets.data" />

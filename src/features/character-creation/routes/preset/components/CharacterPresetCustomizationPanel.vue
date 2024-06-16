@@ -12,10 +12,34 @@ import config from './form-config';
 import { intl } from '@spuxx/browser-utils';
 import { createInputValidationRules } from '@/utils/form.utils';
 import { computed } from 'vue';
+import type { Blueprint, CharacterPreset } from '@newhorizons/core';
 
 const characterPreset = computed(() => CharacterCreator.preset);
 
 const { variant, fields } = config;
+
+const useNumericField = (
+  fieldName: keyof Blueprint<CharacterPreset, 'name' | 'modifiers' | 'dependencies'>,
+) => {
+  return computed({
+    get: () => (characterPreset.value ? characterPreset.value[fieldName].toString() : ''),
+    set: (value) => {
+      if (characterPreset.value) {
+        characterPreset.value[fieldName] = parseInt(value);
+      }
+    },
+  });
+};
+
+const attributePoints = useNumericField('attributePoints');
+const traitPoints = useNumericField('traitPoints');
+const interestPoints = useNumericField('interestPoints');
+const traitsMinimum = useNumericField('traitsMinimum');
+const traitsMaximum = useNumericField('traitsMaximum');
+const abilitiesMaximum = useNumericField('abilitiesMaximum');
+const bonusCredits = useNumericField('bonusCredits');
+const startExperience = useNumericField('startExperience');
+const startFatePoints = useNumericField('startFatePoints');
 
 const handleUpdate = () => {
   if (CharacterCreator.preset) {
@@ -45,7 +69,7 @@ const createRules = (min: number, max: number) => {
               <VTextField
                 type="number"
                 :variant
-                v-model="characterPreset.attributePoints"
+                v-model="attributePoints"
                 @update:model-value="handleUpdate"
                 :label="intl('character-creation.route.preset.attribute-points.label')"
                 :hint="intl('character-creation.route.preset.attribute-points.hint')"
@@ -58,7 +82,7 @@ const createRules = (min: number, max: number) => {
               <VTextField
                 type="number"
                 :variant
-                v-model="characterPreset.traitPoints"
+                v-model="traitPoints"
                 @update:model-value="handleUpdate"
                 :label="intl('character-creation.route.preset.trait-points.label')"
                 :hint="intl('character-creation.route.preset.trait-points.hint')"
@@ -71,7 +95,7 @@ const createRules = (min: number, max: number) => {
               <VTextField
                 type="number"
                 :variant
-                v-model="characterPreset.interestPoints"
+                v-model="interestPoints"
                 @update:model-value="handleUpdate"
                 :label="intl('character-creation.route.preset.interest-points.label')"
                 :hint="intl('character-creation.route.preset.interest-points.hint')"
@@ -86,7 +110,7 @@ const createRules = (min: number, max: number) => {
               <VTextField
                 type="number"
                 :variant
-                v-model="CharacterCreator.preset.traitsMinimum"
+                v-model="traitsMinimum"
                 @update:model-value="handleUpdate"
                 :label="intl('character-creation.route.preset.traits-minimum.label')"
                 :hint="intl('character-creation.route.preset.traits-minimum.hint')"
@@ -99,7 +123,7 @@ const createRules = (min: number, max: number) => {
               <VTextField
                 type="number"
                 :variant
-                v-model="CharacterCreator.preset.traitsMaximum"
+                v-model="traitsMaximum"
                 @update:model-value="handleUpdate"
                 :label="intl('character-creation.route.preset.traits-maximum.label')"
                 :hint="intl('character-creation.route.preset.traits-maximum.hint')"
@@ -112,7 +136,7 @@ const createRules = (min: number, max: number) => {
               <VTextField
                 type="number"
                 :variant
-                v-model="CharacterCreator.preset.abilitiesMaximum"
+                v-model="abilitiesMaximum"
                 @update:model-value="handleUpdate"
                 :label="intl('character-creation.route.preset.abilities-maximum.label')"
                 :hint="intl('character-creation.route.preset.abilities-maximum.hint')"
@@ -127,7 +151,7 @@ const createRules = (min: number, max: number) => {
               <VTextField
                 type="number"
                 :variant
-                v-model="CharacterCreator.preset.bonusCredits"
+                v-model="bonusCredits"
                 @update:model-value="handleUpdate"
                 :label="intl('character-creation.route.preset.bonus-credits.label')"
                 :hint="intl('character-creation.route.preset.bonus-credits.hint')"
@@ -140,7 +164,7 @@ const createRules = (min: number, max: number) => {
               <VTextField
                 type="number"
                 :variant
-                v-model="CharacterCreator.preset.startExperience"
+                v-model="startExperience"
                 @update:model-value="handleUpdate"
                 :label="intl('character-creation.route.preset.start-experience.label')"
                 :hint="intl('character-creation.route.preset.start-experience.hint')"
@@ -153,7 +177,7 @@ const createRules = (min: number, max: number) => {
               <VTextField
                 type="number"
                 :variant
-                v-model="CharacterCreator.preset.startFatePoints"
+                v-model="startFatePoints"
                 @update:model-value="handleUpdate"
                 :label="intl('character-creation.route.preset.start-fate-points.label')"
                 :hint="intl('character-creation.route.preset.start-fate-points.hint')"

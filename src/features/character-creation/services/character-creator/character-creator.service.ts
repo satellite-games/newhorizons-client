@@ -1,6 +1,5 @@
 import { ServiceMixin, debug, intl } from '@spuxx/browser-utils';
 import { ref } from 'vue';
-import { CharacterCreationProgress } from './types';
 import {
   Character,
   CharacterCreationContext,
@@ -12,54 +11,53 @@ import {
  * `CharacterCreator` is responsible for managing the character creation process.
  */
 export class CharacterCreator extends ServiceMixin<CharacterCreator>() {
-  private _progress = ref<CharacterCreationProgress>(CharacterCreationProgress.initial);
+  private _selectedPreset = ref<CharacterPreset | undefined>(undefined);
   private _context = ref<CharacterCreationContext | null>(null);
+
+  /**
+   * Selects a preset for the character creation process. This will reset the current context.
+   * @param preset The preset to select.
+   */
+  static selectPreset(preset: Blueprint<CharacterPreset>) {
+    this.instance._selectedPreset.value = new CharacterPreset(preset);
+    this.instance._context.value = null;
+  }
 
   /**
    * Starts the character creation process.
    */
-  static start(preset: Blueprint<CharacterPreset>) {
-    const context = new CharacterCreationContext(new CharacterPreset(preset));
+  static startCreation() {
+    const preset = this.instance._selectedPreset.value;
+    if (!preset) throw new Error('Select a preset before starting the character creation process.');
+    const context = new CharacterCreationContext(preset);
     this.instance._context.value = context;
     const { character } = context;
     character.general.name = intl('character-creation.default-character-name');
-    this.setProgress(CharacterCreationProgress.presetSelected);
     debug(`Character creation started for character ${character.id}.`, this.name);
   }
 
-  static get progress() {
-    return this.instance._progress.value;
-  }
-
-  static get context(): CharacterCreationContext | null {
-    return this.instance._context.value;
+  /**
+   * Resets the character creation process. Does not reset the selected preset.
+   */
+  static reset() {
+    this.instance._context.value = null;
   }
 
   static get preset(): CharacterPreset | undefined {
-    return this.context?.preset;
+    return this.instance._context.value
+      ? this.instance._context.value.preset
+      : this.instance._selectedPreset.value;
   }
 
   static get character(): Character | undefined {
-    return this.context?.character;
+    return this.instance._context.value?.character;
   }
 
-  /**
-   * Indicates whether the character creation process is currently in progress.
-   */
-  static get creationInProgress() {
-    return this.progress !== CharacterCreationProgress.initial;
+  static get presetLocked() {
+    return !!this.instance._context.value;
   }
 
-  /**
-   * Resets the character creation process. All progress will be lost.
-   */
-  static async reset() {
-    this.instance._progress.value = CharacterCreationProgress.initial;
-    this.instance._context.value = null;
-    debug('Character creation reset.', this.name);
-  }
-
-  static setProgress(progress: CharacterCreationProgress) {
-    this.instance._progress.value = progress;
+  static get originLocked() {
+    return !!this.instance._context.value?.character.general.originName;
   }
 }

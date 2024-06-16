@@ -15,10 +15,6 @@ const props = defineProps<{
 }>();
 
 const characterPresets = props.characterPresets ?? [];
-const selectedPreset = ref<Blueprint<CharacterPreset>>(
-  CharacterCreator.preset ?? characterPresets[0],
-);
-// if (!CharacterCreator.preset) CharacterCreator.setPreset(characterPresets[0]);
 const characterPresetOptions: ButtonSelectOption[] = characterPresets.map((preset) => ({
   value: preset.name,
   title: intl(preset.name),
@@ -26,9 +22,7 @@ const characterPresetOptions: ButtonSelectOption[] = characterPresets.map((prese
 
 const handlePresetSelect = (value: string) => {
   const characterPreset = characterPresets.find((preset) => preset.name === value);
-  if (characterPreset) {
-    selectedPreset.value = characterPreset;
-  }
+  if (characterPreset) CharacterCreator.selectPreset(characterPreset);
 };
 
 const form = ref<VForm>();
@@ -40,7 +34,7 @@ const handleSubmit = async (event: SubmitEventPromise) => {
     // We include a short delay here to indicate that the creation process is starting
     submitLoading.value = true;
     await sleep(1000);
-    CharacterCreator.start(selectedPreset.value);
+    CharacterCreator.startCreation();
     submitLoading.value = false;
     router.push({ name: 'character-creation/origin' });
   }
@@ -48,20 +42,19 @@ const handleSubmit = async (event: SubmitEventPromise) => {
 
 const handleReset = () => {
   CharacterCreator.reset();
-  // CharacterCreator.start({ ...characterPresets[0] });
 };
 </script>
 
 <template>
   <VForm
     ref="form"
-    v-if="Array.isArray(characterPresets) && selectedPreset"
+    v-if="Array.isArray(characterPresets) && CharacterCreator.preset"
     @submit.prevent="handleSubmit"
-    :disabled="CharacterCreator.creationInProgress"
+    :disabled="CharacterCreator.presetLocked"
   >
     <ButtonSelect
       :label="intl('character-creation.route.preset.select')"
-      :selected-value="selectedPreset.name"
+      :selected-value="CharacterCreator.preset.name"
       :options="characterPresetOptions"
       :rules="
         createSelectValidationRules({
@@ -70,7 +63,7 @@ const handleReset = () => {
       "
       color="secondary"
       required
-      :disabled="CharacterCreator.creationInProgress"
+      :disabled="CharacterCreator.presetLocked"
       :on-select="handlePresetSelect"
     />
 
@@ -78,7 +71,7 @@ const handleReset = () => {
 
     <footer class="d-flex justify-center">
       <VBtn
-        v-if="CharacterCreator.creationInProgress"
+        v-if="CharacterCreator.presetLocked"
         type="button"
         size="large"
         color="primary"

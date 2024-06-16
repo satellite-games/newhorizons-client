@@ -9,6 +9,10 @@ import { computed } from 'vue';
 const stringifiedPreset = computed(
   () => JSON.stringify(CharacterCreator.preset, null, 2) ?? 'No preset selected',
 );
+
+const stringifiedCharacter = computed(() =>
+  JSON.stringify(CharacterCreator.character?.getNonCircularCopy(), null, 2),
+);
 </script>
 
 <template>
@@ -19,6 +23,7 @@ const stringifiedPreset = computed(
     <router-view />
     <DebugContent>
       {{ stringifiedPreset }}
+      <br /><br />{{ stringifiedCharacter }}
     </DebugContent>
   </PageContent>
 </template>

@@ -1,9 +1,6 @@
 import { ServiceMixin, debug } from '@spuxx/browser-utils';
 import type { DevelopmentOptions } from './types';
-import {
-  CharacterCreationProgress,
-  CharacterCreator,
-} from '@/features/character-creation/services/character-creator';
+import { CharacterCreator } from '@/features/character-creation/services/character-creator';
 import { getBlueprints } from '../game-data-provider';
 import { CharacterPreset } from '@newhorizons/core';
 
@@ -34,14 +31,14 @@ export class Development extends ServiceMixin<Development>() {
   }
 
   private static async setupCharacterCreation() {
-    const { INITIAL_CC_PROGRESS } = { INITIAL_CC_PROGRESS: 0, ...this.options };
-    if (INITIAL_CC_PROGRESS >= CharacterCreationProgress.presetSelected) {
-      const characterPresets = await getBlueprints<CharacterPreset>('characterPresets');
-      CharacterCreator.setPreset(characterPresets[0]);
-      CharacterCreator.start();
-    }
-    if (INITIAL_CC_PROGRESS >= CharacterCreationProgress.originSelected) {
-      // CharacterCreator.setProgress(CharacterCreationProgress.characterCreated);
-    }
+    // const { INITIAL_CC_PROGRESS } = { INITIAL_CC_PROGRESS: 0, ...this.options };
+    // if (INITIAL_CC_PROGRESS >= CharacterCreationProgress.presetSelected) {
+    //   const characterPresets = await getBlueprints<CharacterPreset>('characterPresets');
+    //   CharacterCreator.setPreset(characterPresets[0]);
+    //   CharacterCreator.start();
+    // }
+    // if (INITIAL_CC_PROGRESS >= CharacterCreationProgress.originSelected) {
+    //   // CharacterCreator.setProgress(CharacterCreationProgress.characterCreated);
+    // }
   }
 }

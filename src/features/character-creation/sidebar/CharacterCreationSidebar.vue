@@ -4,15 +4,10 @@ import { Icon } from '@iconify/vue/dist/iconify.js';
 import { VList, VListItem } from 'vuetify/components';
 import { CharacterCreator } from '../services/character-creator/character-creator.service';
 import { computed } from 'vue';
-import { CharacterCreationProgress } from '../services/character-creator';
 import { intl } from '@spuxx/browser-utils';
 
-const originDisabled = computed(
-  () => CharacterCreator.progress < CharacterCreationProgress.presetSelected,
-);
-const postOriginDisabled = computed(
-  () => CharacterCreator.progress < CharacterCreationProgress.originSelected,
-);
+const originDisabled = computed(() => !CharacterCreator.presetLocked);
+const postOriginDisabled = computed(() => !CharacterCreator.originLocked);
 </script>
 
 <template>

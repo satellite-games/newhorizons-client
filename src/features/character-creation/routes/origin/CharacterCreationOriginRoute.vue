@@ -5,7 +5,7 @@ import { GameDataProvider } from '@/services/game-data-provider';
 import { CharacterOrigin, type Blueprint } from '@newhorizons/core';
 import { intl } from '@spuxx/browser-utils';
 import { VBtn, VForm } from 'vuetify/components';
-import { CharacterCreationProgress, CharacterCreator } from '../../services/character-creator';
+import { CharacterCreator } from '../../services/character-creator';
 import ButtonSelect, { type ButtonSelectOption } from '@/components/common/ButtonSelect.vue';
 import { ref } from 'vue';
 import { computed } from 'vue';
@@ -50,7 +50,7 @@ const handleSelect = (value: string) => {
 };
 
 const disabled = computed(() => {
-  return CharacterCreator.progress !== CharacterCreationProgress.presetSelected;
+  return CharacterCreator.originLocked;
 });
 
 const form = ref<VForm>();
@@ -68,7 +68,7 @@ const handleSubmit = () => {};
       <SimpleNavButton
         type="forward"
         to="/create-character/general"
-        :disabled="CharacterCreator.progress < CharacterCreationProgress.originSelected"
+        :disabled="!CharacterCreator.originLocked"
       />
     </template>
     <VForm
@@ -98,12 +98,7 @@ const handleSubmit = () => {};
         v-bind="Wiki.getArticlePath(selectedOriginName)"
       />
       <OriginOptionsForm v-if="selectedOrigin" :origin="selectedOrigin" :disabled />
-      <VBtn
-        :disabled="CharacterCreator.progress !== CharacterCreationProgress.presetSelected"
-        type="submit"
-        size="large"
-        color="primary"
-      >
+      <VBtn :disabled="CharacterCreator.originLocked" type="submit" size="large" color="primary">
         {{ intl('character-creation.route.origin.submit') }}
       </VBtn>
     </VForm>
