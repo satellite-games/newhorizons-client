@@ -112,6 +112,7 @@ const handleSubmit = async (event: SubmitEventPromise) => {
       :label="intl('character-creation.route.origin.first-language.label')"
       :hint="intl('character-creation.route.origin.first-language.hint')"
       :model-value="firstLanguage"
+      @update:model-value="firstLanguage = $event"
       :rules="createInputValidationRules({ required: true, type: 'text' })"
       bg-color="secondary"
       required
