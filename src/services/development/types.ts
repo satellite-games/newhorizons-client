@@ -4,5 +4,5 @@ export interface DevelopmentOptions {
   /**
    * The initial state of the character creation.
    */
-  // INITIAL_CC_PROGRESS: CharacterCreationProgress;
+  INITIAL_CC_PROGRESS?: 'preset-locked' | 'origin-locked';
 }
