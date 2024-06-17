@@ -9,3 +9,6 @@ const router = createRouter({
 });
 
 export default router;
+
+export * from './router.utils';
+export * from './router.hooks';
