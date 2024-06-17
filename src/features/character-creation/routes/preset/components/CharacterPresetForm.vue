@@ -3,7 +3,7 @@ import ButtonSelect, { type ButtonSelectOption } from '@/components/common/Butto
 import { CharacterCreator } from '@/features/character-creation/services/character-creator';
 import router from '@/router';
 import { CharacterPreset, type Blueprint } from '@newhorizons/core';
-import { intl, sleep } from '@spuxx/browser-utils';
+import { intl } from '@spuxx/browser-utils';
 import { ref } from 'vue';
 import type { SubmitEventPromise } from 'vuetify';
 import { VBtn, VForm } from 'vuetify/components';
@@ -27,15 +27,10 @@ const handlePresetSelect = (value: string) => {
 
 const form = ref<VForm>();
 
-const submitLoading = ref(false);
 const handleSubmit = async (event: SubmitEventPromise) => {
   const { valid } = await event;
   if (valid) {
-    // We include a short delay here to indicate that the creation process is starting
-    submitLoading.value = true;
-    await sleep(1000);
     CharacterCreator.startCreation();
-    submitLoading.value = false;
     router.push({ name: 'character-creation/origin' });
   }
 };
@@ -80,7 +75,7 @@ const handleReset = () => {
       >
         {{ intl('character-creation.route.preset.reset') }}
       </VBtn>
-      <VBtn v-else type="submit" size="large" color="primary" :loading="submitLoading">
+      <VBtn v-else type="submit" size="large" color="primary">
         {{ intl('character-creation.route.preset.start') }}
       </VBtn>
     </footer>

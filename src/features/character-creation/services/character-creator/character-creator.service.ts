@@ -3,8 +3,10 @@ import { ref } from 'vue';
 import {
   Character,
   CharacterCreationContext,
+  CharacterOrigin,
   CharacterPreset,
   type Blueprint,
+  type CharacterSkillName,
 } from '@newhorizons/core';
 
 /**
@@ -34,6 +36,23 @@ export class CharacterCreator extends ServiceMixin<CharacterCreator>() {
     const { character } = context;
     character.general.name = intl('character-creation.default-character-name');
     debug(`Character creation started for character ${character.id}.`, this.name);
+  }
+
+  /**
+   * Chooses an origin for the character. This will apply the origin's bonuses to the character.
+   * Cannot be called a second time.
+   * @param blueprint The origin blueprint to apply.
+   * @param selectableSkillBonuses The selected skill bonuses that the user has chosen.
+   * @param firstLanguage The first language that the user has chosen.
+   */
+  static chooseOrigin(
+    blueprint: Blueprint<CharacterOrigin>,
+    selectedSkillBonus: { value: number; name: CharacterSkillName }[],
+    firstLanguage: string,
+  ) {
+    const context = this.instance._context.value;
+    if (!context) throw new Error('Character creation process not started.');
+    context.applyOrigin(blueprint, selectedSkillBonus, firstLanguage);
   }
 
   /**

@@ -82,7 +82,7 @@ character-creation:
       start-fate-points:
         label: Start-Schicksalspunkte
         hint: Die Anzahl an Schicksalspunkten, die Du zu Beginn des Spiels erhältst.
-      start: Erschaffung beginnen
+      start: Voreinstellung wählen
       reset: Charaktererstellung zurücksetzen
     origin:
       title: Herkunft
