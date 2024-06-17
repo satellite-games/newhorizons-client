@@ -14,21 +14,24 @@ const props = withDefaults(
   defineProps<{
     label: string;
     options?: ButtonSelectOption[];
-    selectedValue?: string;
+    modelValue?: string;
+    defaultValue?: string;
     color?: Color;
     required?: boolean;
     disabled?: boolean;
     rules?: Array<(value: string) => string | boolean>;
-    onSelect: (value: string) => void;
+    onSelect?: (value: string) => void;
   }>(),
   {
     color: 'secondary',
   },
 );
-// const selectedValue = computed(() => props.selectedValue);
-const selectedValue = ref(props.selectedValue);
+
+const emits = defineEmits(['update:modelValue']);
+
+const selectedValue = ref(props.modelValue ?? props.defaultValue);
 watch(
-  () => props.selectedValue,
+  () => props.modelValue,
   (newVal) => {
     selectedValue.value = newVal;
   },
@@ -48,10 +51,9 @@ const selectNextOrPrevious = (change: number) => {
 };
 
 const handleSelect = (value: string) => {
-  if (value) {
-    selectedValue.value = value;
-    props.onSelect(value);
-  }
+  selectedValue.value = value;
+  emits('update:modelValue', value);
+  if (props.onSelect) props.onSelect(value);
 };
 </script>
 <template>

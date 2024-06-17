@@ -54,7 +54,7 @@ const handleReset = () => {
   >
     <ButtonSelect
       :label="intl('character-creation.route.preset.select')"
-      :selected-value="CharacterCreator.preset.name"
+      :default-value="CharacterCreator.preset.name"
       :options="characterPresetOptions"
       :rules="
         createSelectValidationRules({

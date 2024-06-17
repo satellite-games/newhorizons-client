@@ -32,7 +32,7 @@ export const createInputValidationRules = (options: {
   }
   if (required) {
     rules.push((value: string | number) =>
-      value.toString() ? true : intl('validation.input-required'),
+      value?.toString() ? true : intl('validation.input-required'),
     );
   }
   if (typeof min === 'number') {
