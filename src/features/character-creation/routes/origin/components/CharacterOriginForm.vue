@@ -7,8 +7,11 @@ import { type Blueprint, type CharacterOrigin, type CharacterSkillName } from '@
 import { Wiki } from '@newhorizons/wiki';
 import { intl } from '@spuxx/browser-utils';
 import { ref, computed } from 'vue';
+import { useRouter } from 'vue-router';
 import type { SubmitEventPromise } from 'vuetify';
 import { VBtn, VDivider, VForm, VTextField } from 'vuetify/components';
+
+const router = useRouter();
 
 const props = defineProps<{
   characterOrigins: Blueprint<CharacterOrigin>[];
@@ -49,14 +52,12 @@ const form = ref<VForm>();
 const handleSubmit = async (event: SubmitEventPromise) => {
   const { valid } = await event;
   if (valid) {
-    console.log(selectedOrigin.value);
-    console.log(firstLanguage.value);
-    console.log(selectedSkillBonuses.value);
     CharacterCreator.chooseOrigin(
       selectedOrigin.value,
       selectedSkillBonuses.value,
       firstLanguage.value,
     );
+    router.push({ name: 'character-creation/general' });
   }
 };
 </script>
