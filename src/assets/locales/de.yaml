@@ -93,7 +93,34 @@ character-creation:
       select-skill-bonus: Fähigkeitsbonus wählen
       submit: Herkunft wählen
     general:
-      title: Persönliches
+      title: Allgemeine Informationen
+      name:
+        label: Name
+        hint: Der Name Deines Charakters.
+      gender:
+        label: Geschlecht/Gender/Pronomen
+        hint: Das Geschlecht, die geschlechtliche Identität oder die Pronomen Deines Charakters.
+      age:
+        label: Alter
+        hint: Das biologische Alter Deines Charakters. Wenn Du mit Deiner Spielleiter:in nichts anderes besprochen hast, spielt New Horizons um das Jahr 2300.
+      birthday:
+        label: Geburtsdatum
+        hint: Das Geburtsdatum Deines Charakters. Wenn Du mit Deiner Spielleiter:in nichts anderes besprochen hast, spielt New Horizons um das Jahr 2300.
+      height:
+        label: Größe
+        hint: Die Körpergröße Deines Charakters in Zentimetern.
+      weight:
+        label: Gewicht
+        hint: Das Körpergewicht Deines Charakters in Kilogramm.
+      appearance:
+        label: Äußere Erscheinung
+        hint: Beschreibe kurz die äußere Erscheinung Deines Charakters.
+      personality:
+        label: Persönlichkeit
+        hint: Beschreibe kurz die Persönlichkeit Deines Charakters.
+      family:
+        label: Familiärer Hintergrund
+        hint: Beschreibe kurz den familiären Hintergrund Deines Charakters.
     attributes:
       title: Attribute
     traits:

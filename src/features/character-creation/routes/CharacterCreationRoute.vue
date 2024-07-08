@@ -18,7 +18,7 @@ const stringifiedCharacter = computed(() =>
 <template>
   <CharacterCreationSidebar />
   <PageContent
-    :title="CharacterCreator.character?.general.name ?? intl('character-creation.title')"
+    :title="CharacterCreator.character?.general.name || intl('character-creation.title')"
   >
     <router-view />
     <DebugContent>

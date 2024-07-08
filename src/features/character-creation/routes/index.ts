@@ -2,6 +2,7 @@ import type { RouteRecordRaw } from 'vue-router';
 import CharacterCreationRoute from './CharacterCreationRoute.vue';
 import CharacterCreationPresetRoute from './preset/CharacterCreationPresetRoute.vue';
 import CharacterCreationOriginRoute from './origin/CharacterCreationOriginRoute.vue';
+import CharacterCreationGeneralRoute from './general/CharacterCreationGeneralRoute.vue';
 
 export const characterCreationRoutes: RouteRecordRaw[] = [
   {
@@ -19,6 +20,11 @@ export const characterCreationRoutes: RouteRecordRaw[] = [
         name: 'character-creation/origin',
         path: 'origin',
         component: CharacterCreationOriginRoute,
+      },
+      {
+        name: 'character-creation/general',
+        path: 'general',
+        component: CharacterCreationGeneralRoute,
       },
     ],
   },

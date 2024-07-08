@@ -19,7 +19,7 @@ export const createSelectValidationRules = (options: { required: boolean }) => {
  */
 export const createInputValidationRules = (options: {
   required?: boolean;
-  type?: 'text' | 'number';
+  type?: 'text' | 'number' | 'date';
   min?: number;
   max?: number;
 }) => {

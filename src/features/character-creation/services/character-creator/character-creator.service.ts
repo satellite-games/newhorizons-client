@@ -6,6 +6,7 @@ import {
   CharacterOrigin,
   CharacterPreset,
   type Blueprint,
+  type CharacterGeneralData,
   type CharacterSkillName,
 } from '@newhorizons/core';
 
@@ -15,6 +16,18 @@ import {
 export class CharacterCreator extends ServiceMixin<CharacterCreator>() {
   private _selectedPreset = ref<CharacterPreset | undefined>(undefined);
   private _context = ref<CharacterCreationContext | null>(null);
+
+  private _constants = {
+    defaultGeneralData: {
+      name: intl('character-creation.default-character-name'),
+      age: 23,
+      gender: 'they/them',
+      birthday: '2277-01-01',
+      height: 180,
+      weight: 80,
+      socialStatus: 1,
+    } as Partial<CharacterGeneralData>,
+  };
 
   /**
    * Selects a preset for the character creation process. This will reset the current context.
@@ -34,7 +47,7 @@ export class CharacterCreator extends ServiceMixin<CharacterCreator>() {
     const context = new CharacterCreationContext(preset);
     this.instance._context.value = context;
     const { character } = context;
-    character.general.name = intl('character-creation.default-character-name');
+    character.general = { ...character.general, ...this.constants.defaultGeneralData };
     debug(`Character creation started for character ${character.id}.`, this.name);
   }
 
@@ -78,5 +91,9 @@ export class CharacterCreator extends ServiceMixin<CharacterCreator>() {
 
   static get originLocked() {
     return !!this.instance._context.value?.character.general.originName;
+  }
+
+  static get constants() {
+    return this.instance._constants;
   }
 }
